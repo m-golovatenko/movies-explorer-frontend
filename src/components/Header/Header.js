@@ -7,7 +7,7 @@ import account from '../../images/header__acc.svg';
 
 function Header() {
   // eslint-disable-next-line
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   // eslint-disable-next-line
   const [darkTheme, setDarkTheme] = useState(false);
   return (
@@ -27,11 +27,6 @@ function Header() {
           )}
         </div>
         {isLoggedIn ? (
-          <ul className="header__auth">
-            <li className="header__auth-reg">Регистрация</li>
-            <li className="header__auth-login">Войти</li>
-          </ul>
-        ) : (
           <Link
             to="/"
             className={!darkTheme ? 'header__acc header__acc_blue' : 'header__acc header__acc_dark'}
@@ -47,6 +42,11 @@ function Header() {
               }
             />
           </Link>
+        ) : (
+          <ul className="header__auth">
+            <li className="header__auth-reg">Регистрация</li>
+            <li className="header__auth-login">Войти</li>
+          </ul>
         )}
       </div>
     </header>
