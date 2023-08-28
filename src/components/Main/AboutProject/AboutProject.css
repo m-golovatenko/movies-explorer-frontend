@@ -12,6 +12,8 @@
   letter-spacing: -0.88px;
   font-weight: 400;
   margin-top: 110px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #dadada;
 }
 
 .about-project__list {
