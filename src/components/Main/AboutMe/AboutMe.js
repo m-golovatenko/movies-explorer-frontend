@@ -4,12 +4,12 @@ import './AboutMe.css';
 function AboutMe() {
   return (
     <div className="about-me">
-      <h2 className="about-me-title">Студент</h2>
-      <div className="about-me-info">
-        <div className="about-me-info-text">
-          <h3 className="about-me-info-text-name">Мария</h3>
-          <p className="about-me-info-text-job">Фронтенд-разработчик, 24 года </p>
-          <p className="about-me-info-text-content">
+      <h2 className="about-me__title">Студент</h2>
+      <div className="about-me__info">
+        <div className="about-me__info-text">
+          <h3 className="about-me__info-text-name">Мария</h3>
+          <p className="about-me__info-text-job">Фронтенд-разработчик, 24 года </p>
+          <p className="about-me__info-text-content">
             Я родилась и живу в Сыктывкаре, закончила факультет международных отношений СыктГУ. Я
             люблю изучать иностранные языки. Недавно начала кодить. С 2020 года работала в
             международном отделе СыктГУ. После того, как прошла курс по веб-разработке, ушла с
@@ -19,12 +19,12 @@ function AboutMe() {
             href="https://github.com/m-golovatenko"
             target="_blank"
             rel="noreferrer"
-            className="about-me-info-text-link"
+            className="about-me__info-text-link"
           >
             Github
           </a>
         </div>
-        <img className="about-me-info-img" alt="Фотография студента." />
+        <img className="about-me__info-img" alt="Фотография студента." />
       </div>
     </div>
   );

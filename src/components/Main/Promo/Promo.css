@@ -2,7 +2,7 @@
   background: #073042;
 }
 
-.promo-container {
+.promo__container {
   max-width: 1140px;
   margin: 0 auto;
   padding: 50px 30px;
@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.promo__img {
+.promo__container-img {
   position: absolute;
   right: 0;
   bottom: 60px;
@@ -20,7 +20,7 @@
   background-size: contain;
 }
 
-.promo__title {
+.promo__container-title {
   margin: 0;
   padding: 0;
   font-size: 40px;
