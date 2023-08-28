@@ -67,3 +67,8 @@
   font-size: 14px;
   letter-spacing: -0.56px;
 }
+
+.tech-container-list-item:hover {
+  cursor: default;
+  background: #3ddc84;
+}
