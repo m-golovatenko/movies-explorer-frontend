@@ -1,0 +1,92 @@
+.about-project {
+  max-width: 1140px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.about-project__title {
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  line-height: 26.63px;
+  letter-spacing: -0.88px;
+  font-weight: 400;
+  margin-top: 110px;
+}
+
+.about-project__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 40px;
+  margin-top: 70px;
+  margin-bottom: 110px;
+}
+
+.about-project__list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.about-project__list-item-title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.about-project__list-item-text {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about-project__schedule {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding-bottom: 110px;
+}
+
+.about-project__schedule-item {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-project__schedule-item-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 9px 0;
+}
+
+.about-project__schedule-item-title_short {
+  background: #3ddc84;
+  color: #000;
+}
+
+.about-project__schedule-item-title_long {
+  background: #303030;
+  color: #fff;
+}
+
+.about-project__schedule-item-subtitle {
+  margin: 0;
+  padding: 0;
+  color: #8b8b8b;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
