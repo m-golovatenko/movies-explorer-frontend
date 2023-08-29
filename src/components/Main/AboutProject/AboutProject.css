@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 26px;
+  width: 100%;
 }
 
 .about-project__list-item-title {
@@ -81,6 +82,11 @@
 }
 
 @media (max-width: 768px) {
+  .about-project {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
   .about-project__list {
     gap: 30px;
     margin-bottom: 93px;
@@ -88,6 +94,11 @@
 
   .about-project__list-item {
     gap: 22px;
+  }
+
+  .about-project__list-item-text {
+    font-size: 12px;
+    line-height: 18px;
   }
 }
 
