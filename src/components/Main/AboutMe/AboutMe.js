@@ -4,7 +4,7 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 
 function AboutMe() {
   return (
-    <div className="about-me">
+    <section className="about-me">
       <SectionHeading titleText="Студент" />
       <div className="about-me__info">
         <div className="about-me__info-text">
@@ -29,7 +29,7 @@ function AboutMe() {
         </div>
         <img className="about-me__info-img" alt="Фотография студента." />
       </div>
-    </div>
+    </section>
   );
 }
 

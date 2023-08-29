@@ -4,7 +4,7 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 
 function Techs() {
   return (
-    <div className="techs">
+    <section className="techs">
       <div className="techs-container">
         <SectionHeading titleText="Технологии" />
         <div className="techs-container-content">
@@ -23,7 +23,7 @@ function Techs() {
           <li className="techs-container-list-item">mongoDB</li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 
