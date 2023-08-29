@@ -45,6 +45,7 @@
     width: 100%;
     margin: 0 auto;
     height: 230px;
+    background-position: center;
   }
 }
 
@@ -62,11 +63,9 @@
   }
 
   .promo__container-img {
-    width: 320px;
+    width: 100%;
     height: 230px;
     background-position: center;
     background-size: cover;
-    margin-left: -10px;
-    margin-right: -10px;
   }
 }

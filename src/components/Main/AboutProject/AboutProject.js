@@ -1,10 +1,11 @@
 import React from 'react';
 import './AboutProject.css';
+import SectionHeading from '../SectionHeading/SectionHeading';
 
 function AboutProject() {
   return (
     <div className="about-project">
-      <h2 className="about-project__title">О проекте</h2>
+      <SectionHeading titleText="О проекте" />
       <ul className="about-project__list">
         <li className="about-project__list-item">
           <h3 className="about-project__list-item-title">Дипломный проект включал 5 этапов</h3>
