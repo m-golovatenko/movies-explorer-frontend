@@ -4,7 +4,7 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 
 function AboutProject() {
   return (
-    <div className="about-project">
+    <section className="about-project">
       <SectionHeading titleText="О проекте" />
       <ul className="about-project__list">
         <li className="about-project__list-item">
@@ -36,7 +36,7 @@ function AboutProject() {
           <p className="about-project__schedule-item-subtitle">Front-end</p>
         </li>
       </ul>
-    </div>
+    </section>
   );
 }
 
