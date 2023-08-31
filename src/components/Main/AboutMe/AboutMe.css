@@ -95,3 +95,43 @@
     line-height: 18px;
   }
 }
+
+@media (max-width: 540px) {
+  .about-me {
+    padding: 70px 14px;
+  }
+
+  .about-me__info {
+    flex-direction: column;
+    margin-top: 60px;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .about-me__info-text {
+    order: 2;
+  }
+
+  .about-me__info-img {
+    width: 292px;
+    height: 352px;
+    order: 1;
+  }
+
+  .about-me__info-text-name {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .about-me__info-text-job {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__info-text-content {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 40px;
+  }
+}
