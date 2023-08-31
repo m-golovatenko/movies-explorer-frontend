@@ -104,6 +104,48 @@
 
 @media (max-width: 540px) {
   .about-project {
-    padding: 70px 18px;
+    padding: 70px 18px 69px;
+  }
+
+  .about-project__list {
+    gap: 56px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    flex-direction: column;
+  }
+
+  .about-project__list-item {
+    gap: 16px;
+  }
+
+  .about-project__list-item-title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-project__list-item-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__schedule-item {
+    gap: 10px;
+  }
+
+  .about-project__schedule-item-title {
+    font-size: 11px;
+    padding: 11px 0;
+  }
+
+  .about-project__schedule-item-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+@media (max-width: 320px) {
+  .about-project__schedule {
+    grid-template-columns: 100px 184px;
   }
 }
