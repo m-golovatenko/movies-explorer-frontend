@@ -64,3 +64,15 @@
   width: 270px;
   height: 327px;
 }
+
+@media (max-width: 768px) {
+  .about-me {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .about-me__info {
+    gap: 49px;
+    justify-content: center;
+  }
+}
