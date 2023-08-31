@@ -44,6 +44,7 @@
   list-style-type: none;
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .techs__container-list-item {
@@ -92,5 +93,33 @@
     width: 84px;
     font-size: 12px;
     letter-spacing: -0.48px;
+  }
+}
+
+@media (max-width: 540px) {
+  .techs__container {
+    padding: 70px 18px;
+  }
+
+  .techs__container-content {
+    margin-top: 60px;
+    gap: 24px;
+  }
+
+  .techs__container-content-title {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .techs__container-content-text {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+  }
+
+  .techs__container-list {
+    margin-top: 50px;
+    flex-wrap: wrap;
   }
 }
