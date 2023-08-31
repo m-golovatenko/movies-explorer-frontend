@@ -54,3 +54,37 @@
 .footer__content-links-item:hover {
   opacity: 0.8;
 }
+
+@media (max-width: 540px) {
+  .footer {
+    padding: 79px 10px 20px;
+    display: flex;
+  }
+
+  .footer__text {
+    font-size: 12px;
+  }
+
+  .footer__content {
+    padding-top: 30px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer__content-copyright {
+    order: 2;
+    color: #8b8b8b;
+    font-size: 12px;
+  }
+
+  .footer__content-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer__content-links-item {
+    font-size: 12px;
+  }
+}
