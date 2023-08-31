@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 66px;
+  gap: 49px;
 }
 
 .about-me__info-text {
@@ -63,6 +64,7 @@
   background: lightgray;
   width: 270px;
   height: 327px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
@@ -70,9 +72,26 @@
     padding-top: 90px;
     padding-bottom: 90px;
   }
+  .about-me__info-img {
+    width: 255px;
+    height: 307px;
+  }
 
-  .about-me__info {
-    gap: 49px;
-    justify-content: center;
+  .about-me__info-text-name {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+    margin-bottom: 16px;
+  }
+
+  .about-me__info-text-job {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+
+  .about-me__info-text-content {
+    font-size: 12px;
+    line-height: 18px;
   }
 }
