@@ -73,3 +73,32 @@
     width: 27px;
   }
 }
+
+@media (max-width: 540px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+  }
+
+  .portfolio__list {
+    margin-top: 40px;
+  }
+
+  .portfolio__list-item {
+    padding-bottom: 19px;
+  }
+
+  .portfolio__list-item-link-title {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__list-item-link-icon {
+    width: 18px;
+    height: 28px;
+  }
+}
