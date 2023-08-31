@@ -121,5 +121,6 @@
   .techs__container-list {
     margin-top: 50px;
     flex-wrap: wrap;
+    padding: 0 52px;
   }
 }

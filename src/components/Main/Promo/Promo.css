@@ -51,12 +51,13 @@
 
 @media (max-width: 540px) {
   .promo__container {
-    padding-top: 183px;
-    padding-bottom: 70px;
+    max-width: 100%;
+    padding: 183px 0 70px;
     gap: 140px;
   }
 
   .promo__container-title {
+    padding: 0 10px;
     font-size: 31px;
     line-height: 39px;
     letter-spacing: -1.24px;
