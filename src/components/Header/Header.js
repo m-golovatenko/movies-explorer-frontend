@@ -1,17 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import account from '../../images/header__acc.svg';
 
 function Header() {
   // eslint-disable-next-line
   const [isLoggedIn, setLoggedIn] = useState(false);
-  // eslint-disable-next-line
-  const [darkTheme, setDarkTheme] = useState(false);
+
+  const location = useLocation();
+
+  function handleBurgerMenuOpen() {}
+
   return (
-    <header className={!darkTheme ? 'header' : 'header header_dark'}>
+    <header className={location.pathname === '/' ? 'header' : 'header header_dark'}>
       <div className="header__container">
         <div className="header__nav">
           <Link to="/" className="header__logo" aria-label="Логотип учебного прокта" />
@@ -29,14 +32,18 @@ function Header() {
         {isLoggedIn ? (
           <Link
             to="/"
-            className={!darkTheme ? 'header__acc header__acc_blue' : 'header__acc header__acc_dark'}
+            className={
+              location.pathname === '/'
+                ? 'header__acc header__acc_blue'
+                : 'header__acc header__acc_dark'
+            }
           >
             <p className="header__acc-text">Аккаунт</p>
             <img
               src={account}
               alt="Вход в личный кабинет."
               className={
-                !darkTheme
+                location.pathname === '/'
                   ? 'header__acc-img header__acc-img_blue'
                   : 'header__acc-img header__acc-img_dark'
               }
@@ -48,6 +55,7 @@ function Header() {
             <li className="header__auth-login">Войти</li>
           </ul>
         )}
+        <button className="header__burger" onClick={handleBurgerMenuOpen}></button>
       </div>
     </header>
   );

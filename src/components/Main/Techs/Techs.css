@@ -58,11 +58,6 @@
   letter-spacing: -0.56px;
 }
 
-.techs__container-list-item:hover {
-  cursor: default;
-  background: #3ddc84;
-}
-
 .techs__container-list-item_upper {
   text-transform: uppercase;
 }
