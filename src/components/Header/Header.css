@@ -100,7 +100,6 @@
   text-decoration: none;
   align-items: center;
   border-radius: 40px;
-  padding: 9.5px 3px 9.5px 11px;
 }
 
 .header__acc:hover {
@@ -170,12 +169,10 @@
     display: none;
   }
 
-  .header__auth {
-    display: none;
-  }
-
   .header__nav {
     width: calc(100% - 44px);
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 
   .header__burger {
@@ -190,11 +187,25 @@
 
   .header__nav {
     width: calc(100% - 40px);
+    padding-bottom: 2px;
   }
 
   .header__burger {
     width: 40px;
     height: 43px;
     display: block;
+  }
+
+  .header__auth {
+    gap: 14px;
+  }
+
+  .header__auth-reg {
+    font-size: 10px;
+  }
+
+  .header__auth-login {
+    font-size: 10px;
+    padding: 5px 12px;
   }
 }

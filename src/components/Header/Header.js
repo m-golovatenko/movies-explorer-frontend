@@ -7,7 +7,7 @@ import account from '../../images/header__acc.svg';
 
 function Header() {
   // eslint-disable-next-line
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
   const location = useLocation();
 
@@ -30,32 +30,34 @@ function Header() {
           )}
         </div>
         {isLoggedIn ? (
-          <Link
-            to="/"
-            className={
-              location.pathname === '/'
-                ? 'header__acc header__acc_blue'
-                : 'header__acc header__acc_dark'
-            }
-          >
-            <p className="header__acc-text">Аккаунт</p>
-            <img
-              src={account}
-              alt="Вход в личный кабинет."
+          <>
+            <Link
+              to="/"
               className={
                 location.pathname === '/'
-                  ? 'header__acc-img header__acc-img_blue'
-                  : 'header__acc-img header__acc-img_dark'
+                  ? 'header__acc header__acc_blue'
+                  : 'header__acc header__acc_dark'
               }
-            />
-          </Link>
+            >
+              <p className="header__acc-text">Аккаунт</p>
+              <img
+                src={account}
+                alt="Вход в личный кабинет."
+                className={
+                  location.pathname === '/'
+                    ? 'header__acc-img header__acc-img_blue'
+                    : 'header__acc-img header__acc-img_dark'
+                }
+              />
+            </Link>
+            <button className="header__burger" onClick={handleBurgerMenuOpen} />
+          </>
         ) : (
           <ul className="header__auth">
             <li className="header__auth-reg">Регистрация</li>
             <li className="header__auth-login">Войти</li>
           </ul>
         )}
-        <button className="header__burger" onClick={handleBurgerMenuOpen}></button>
       </div>
     </header>
   );
