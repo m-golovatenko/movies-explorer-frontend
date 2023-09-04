@@ -12,6 +12,16 @@
   position: relative;
 }
 
+.burger-menu__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .burger-menu__container {
   position: fixed;
   top: 0;
@@ -27,6 +37,7 @@
   animation-name: burgerIn;
   animation-duration: 0.5s;
   animation-timing-function: ease;
+  z-index: 99999;
 }
 
 .burger-menu__links {

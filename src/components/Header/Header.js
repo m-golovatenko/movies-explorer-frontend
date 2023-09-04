@@ -46,7 +46,7 @@ function Header() {
         {isLoggedIn ? (
           <>
             <Link
-              to="/"
+              to="/profile"
               className={
                 location.pathname === '/'
                   ? 'header__acc header__acc_blue'
