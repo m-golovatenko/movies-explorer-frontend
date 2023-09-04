@@ -28,10 +28,16 @@ function Header() {
           <Link to="/" className="header__logo" aria-label="Логотип учебного прокта" />
           {isLoggedIn ? (
             <ul className="header__links">
-              <li to="" className="header__links-item">
-                Фильмы
+              <li>
+                <Link to="/movies" className="header__links-item">
+                  Фильмы
+                </Link>
               </li>
-              <li className="header__links-item">Сохраненные фильмы</li>
+              <li>
+                <Link to="/saved-movies" className="header__links-item">
+                  Сохраненные фильмы
+                </Link>
+              </li>
             </ul>
           ) : (
             ' '

@@ -1,3 +1,12 @@
+@keyframes burgerIn {
+  0% {
+    transform: translateX(248px);
+  }
+  100% {
+    transform: translateX(100% - 248px);
+  }
+}
+
 .burger-menu {
   width: 100%;
   position: relative;
@@ -15,6 +24,9 @@
   align-items: center;
   text-align: center;
   justify-content: space-between;
+  animation-name: burgerIn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
 }
 
 .burger-menu__links {

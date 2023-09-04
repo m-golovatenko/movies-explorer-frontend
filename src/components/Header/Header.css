@@ -49,6 +49,8 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
+  text-decoration: none;
+  color: #fff;
 }
 
 .header__links-item:hover {
