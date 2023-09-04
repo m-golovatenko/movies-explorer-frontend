@@ -1,0 +1,25 @@
+.burger-menu-link {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.burger-menu-link:hover {
+  opacity: 0.8;
+}
+
+.burger-menu-link:active {
+  padding-bottom: 4px;
+  border-bottom: 2px solid #fff;
+}
+
+@media (max-width: 540px) {
+  .burger-menu-link:active {
+    padding-bottom: 7px;
+  }
+}

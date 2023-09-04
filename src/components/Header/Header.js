@@ -3,15 +3,23 @@ import { useState } from 'react';
 import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
+import BurgerMenu from './BurgerMenu/BurgerMenu';
 import account from '../../images/header__acc.svg';
 
 function Header() {
   // eslint-disable-next-line
   const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(null);
 
   const location = useLocation();
 
-  function handleBurgerMenuOpen() {}
+  function handleBurgerMenuOpen() {
+    setIsBurgerMenuOpen(true);
+  }
+
+  function handleClose() {
+    setIsBurgerMenuOpen(false);
+  }
 
   return (
     <header className={location.pathname === '/' ? 'header' : 'header header_dark'}>
@@ -59,6 +67,11 @@ function Header() {
           </ul>
         )}
       </div>
+      <BurgerMenu
+        isBurgerMenuOpen={isBurgerMenuOpen}
+        setIsBurgerMenuOpen={setIsBurgerMenuOpen}
+        handleClose={handleClose}
+      />
     </header>
   );
 }
