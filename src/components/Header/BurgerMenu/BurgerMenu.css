@@ -1,15 +1,16 @@
-@keyframes burgerIn {
-  0% {
-    transform: translateX(248px);
-  }
-  100% {
-    transform: translateX(100% - 248px);
-  }
-}
-
 .burger-menu {
   width: 100%;
   position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s ease-out;
+  opacity: 0.01;
+  z-index: 20;
+}
+
+.burger-menu_active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .burger-menu__overlay {
@@ -34,9 +35,6 @@
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  animation-name: burgerIn;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
   z-index: 99999;
 }
 
