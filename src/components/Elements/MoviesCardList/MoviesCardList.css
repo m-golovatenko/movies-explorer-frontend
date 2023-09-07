@@ -6,13 +6,13 @@
   grid-template-columns: repeat(auto-fit, 270px);
   gap: 38px 20px;
   padding-top: 70px;
-  justify-content: center;
 }
 
 @media (max-width: 768px) {
   .movies-list {
     grid-template-columns: repeat(auto-fit, 339px);
     gap: 30px;
+    justify-content: center;
   }
 }
 

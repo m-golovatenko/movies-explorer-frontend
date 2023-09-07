@@ -16,6 +16,10 @@
   color: #fff;
 }
 
+.pagination__button_hidden {
+  display: none;
+}
+
 .pagination__button:hover {
   cursor: pointer;
   opacity: 0.8;

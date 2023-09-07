@@ -23,7 +23,14 @@ function MoviesCard({ img, title, duration }) {
             onClick={handleClick}
           />
         ) : (
-          <button className="movie__delete" aria-label="Удалить"></button>
+          <button
+            className={
+              location.pathname === '/movies'
+                ? 'movie__delete'
+                : 'movie__delete movie__delete_active'
+            }
+            aria-label="Удалить"
+          ></button>
         )}
       </div>
       <p className="movie__duration">{duration}</p>

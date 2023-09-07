@@ -98,4 +98,22 @@ const movies = [
   }
 ];
 
-export { movies };
+const savedMovies = [
+  {
+    title: '33 слова о дизайне',
+    duration: '1ч 42м',
+    img: image1
+  },
+  {
+    title: 'Киноальманах «100 лет дизайна»',
+    duration: '1ч 42м',
+    img: image2
+  },
+  {
+    title: 'В погоне за Бенкси',
+    duration: '1ч 42м',
+    img: image3
+  }
+];
+
+export { movies, savedMovies };

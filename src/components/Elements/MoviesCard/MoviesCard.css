@@ -77,6 +77,11 @@
   opacity: 0.8;
 }
 
+.movie__delete_active {
+  display: inline-block;
+  opacity: 0;
+}
+
 @media (max-width: 768px) {
   .movie__title {
     margin-bottom: 29px;
