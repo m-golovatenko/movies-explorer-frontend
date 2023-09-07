@@ -1,0 +1,28 @@
+.pagination {
+  padding: 50px 0 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination__button {
+  width: 320px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background: #2f2f2f;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.pagination__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media (max-width: 540px) {
+  .pagination__button {
+    width: 240px;
+  }
+}

@@ -15,7 +15,6 @@
 
 @media (max-width: 540px) {
   .movies {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 40px 10px 0;
   }
 }
