@@ -10,8 +10,10 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Footer from '../Footer/Footer';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(true);
   return (
     <div className="root">
       <Helmet>
@@ -20,12 +22,12 @@ function App() {
         <title>Movies Explorer</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/movies" element={<Movies />}></Route>
         <Route path="/saved-movies" element={<SavedMovies />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/profile" element={<Profile setLoggedIn={setLoggedIn} />}></Route>
         <Route path="/signin" element={<Login />}></Route>
         <Route path="/signup" element={<Register />}></Route>
       </Routes>

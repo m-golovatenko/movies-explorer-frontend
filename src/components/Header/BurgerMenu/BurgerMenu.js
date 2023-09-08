@@ -25,7 +25,7 @@ function BurgerMenu({ isBurgerMenuOpen, handleClose }) {
               />
             </li>
           </ul>
-          <Link to="/profile" className={'burger-menu__acc'}>
+          <Link to="/profile" className={'burger-menu__acc'} onClick={handleClose}>
             <p className="burger-menu__acc-text">Аккаунт</p>
             <img src={account} alt="Вход в личный кабинет." className={'burger-menu__acc-img'} />
           </Link>

@@ -6,9 +6,7 @@ import './Header.css';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import account from '../../images/header__acc.svg';
 
-function Header() {
-  // eslint-disable-next-line
-  const [isLoggedIn, setLoggedIn] = useState(true);
+function Header({ isLoggedIn }) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(null);
 
   const location = useLocation();
