@@ -1,5 +1,5 @@
 import React from 'react';
-import BurgerMenuLink from '../../Elements/BurgerMenuLink/BurgerMenuLink';
+import BurgerMenuLink from '../BurgerMenuLink/BurgerMenuLink';
 import { Link } from 'react-router-dom';
 import './BurgerMenu.css';
 import account from '../../../images/header__acc.svg';

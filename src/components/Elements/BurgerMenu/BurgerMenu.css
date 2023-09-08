@@ -2,10 +2,10 @@
   width: 100%;
   position: relative;
   visibility: hidden;
-  opacity: 0;
   transition: visibility 0.2s, opacity 0.2s ease-out;
   opacity: 0.01;
   z-index: 20;
+  display: none;
 }
 
 .burger-menu_active {
@@ -87,6 +87,12 @@
   width: 12px;
   height: 12px;
   background-color: #313131;
+}
+
+@media (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
 }
 
 @media (max-width: 540px) {
