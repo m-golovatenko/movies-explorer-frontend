@@ -6,13 +6,15 @@ import Main from '../Main/Main';
 import Movies from '..//Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import Login from '../Auth/Login/Login';
+import Register from '../Auth/Register/Register';
 import Footer from '../Footer/Footer';
 import './App.css';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
   const [isLoggedIn, setLoggedIn] = useState(true);
   return (
     <div className="root">
@@ -22,7 +24,11 @@ function App() {
         <title>Movies Explorer</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+      {location.pathname !== '/signup' && location.pathname !== '/signin' ? (
+        <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+      ) : (
+        ''
+      )}
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/movies" element={<Movies />}></Route>
@@ -31,7 +37,7 @@ function App() {
         <Route path="/signin" element={<Login />}></Route>
         <Route path="/signup" element={<Register />}></Route>
       </Routes>
-      <Footer />
+      {location.pathname !== '/signup' && location.pathname !== '/signin' ? <Footer /> : ''}
     </div>
   );
 }
