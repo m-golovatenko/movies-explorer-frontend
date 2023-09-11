@@ -65,6 +65,7 @@
   width: 270px;
   height: 327px;
   flex-shrink: 0;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {

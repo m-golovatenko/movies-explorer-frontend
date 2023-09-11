@@ -1,6 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import SectionHeading from '../SectionHeading/SectionHeading';
+import student from '../../../images/student.jpg';
 
 function AboutMe() {
   return (
@@ -27,7 +28,7 @@ function AboutMe() {
             Github
           </a>
         </div>
-        <img className="about-me__info-img" alt="Фотография студента." />
+        <img className="about-me__info-img" alt="Фотография студента." src={student} />
       </div>
     </section>
   );
