@@ -4,9 +4,9 @@ import './SearchForm.css';
 function SearchForm() {
   return (
     <section className="search">
-      <form className="search-content">
+      <form className="search__content">
+        <label className="search__content-img"></label>
         <input className="search__bar" placeholder={'Фильм'} />
-        <div className="searh__img"></div>
         <div className="search__buttons">
           <button className="search__submit" type="submit">
             Найти
@@ -18,7 +18,7 @@ function SearchForm() {
         </div>
       </form>
 
-      <div className="search__short-films_mobile">
+      <div className="search__short-films search__short-films_mobile">
         <input type="checkbox" className="search__toggle-button" />
         <p className="search__text">Короткометражки</p>
       </div>
