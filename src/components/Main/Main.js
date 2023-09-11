@@ -4,16 +4,22 @@ import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-function Main() {
+function Main({ isLoggedIn, setLoggedIn }) {
   return (
-    <main className="main">
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
-    </main>
+    <>
+      <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
+    </>
   );
 }
 

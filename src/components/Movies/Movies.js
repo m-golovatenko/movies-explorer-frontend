@@ -4,14 +4,20 @@ import SearchForm from '../Elements/SearchForm/SearchForm';
 import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import { movies } from '../../utils/consts';
 import Pagination from '../Pagination/Pagination';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-function Movies() {
+function Movies({ isLoggedIn, setLoggedIn }) {
   return (
-    <section className="movies">
-      <SearchForm />
-      <MoviesCardList movies={movies} />
-      <Pagination />
-    </section>
+    <>
+      <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+      <section className="movies">
+        <SearchForm />
+        <MoviesCardList movies={movies} />
+        <Pagination />
+      </section>
+      <Footer />
+    </>
   );
 }
 
