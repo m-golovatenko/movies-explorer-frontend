@@ -22,6 +22,10 @@
   height: 38px;
 }
 
+.auth__logo:hover {
+  opacity: 0.7;
+}
+
 .auth__title {
   margin: 0;
   padding: 0;

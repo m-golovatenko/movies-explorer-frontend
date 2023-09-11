@@ -9,7 +9,7 @@ function BurgerMenu({ isBurgerMenuOpen, handleClose }) {
     <div className={!isBurgerMenuOpen ? 'burger-menu' : ' burger-menu burger-menu_active'}>
       <div className="burger-menu__overlay">
         <nav className="burger-menu__container ">
-          <button className="button-close" onClick={handleClose} />
+          <button className="burger-menu__button-close" onClick={handleClose} type="button" />
           <ul className="burger-menu__links">
             <li>
               <BurgerMenuLink path={'/'} linkText="Главная" handleClick={handleClose} />

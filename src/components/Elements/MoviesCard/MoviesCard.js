@@ -15,12 +15,13 @@ function MoviesCard({ img, title, duration }) {
     <li className="movie">
       <img src={img} alt={title} className="movie__img" />
       <div className="movie__title">
-        <p className="movie__title-text">{title}</p>
+        <h2 className="movie__title-text">{title}</h2>
         {location.pathname === '/movies' ? (
           <button
             className={!isLiked ? 'movie__like' : 'movie__like movie__like_active'}
             aria-label="Сохранить"
             onClick={handleClick}
+            type="button"
           />
         ) : (
           <button
@@ -30,6 +31,7 @@ function MoviesCard({ img, title, duration }) {
                 : 'movie__delete movie__delete_active'
             }
             aria-label="Удалить"
+            type="button"
           ></button>
         )}
       </div>

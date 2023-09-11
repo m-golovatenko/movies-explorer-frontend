@@ -50,11 +50,18 @@
 .footer__content-links-item {
   margin: 0;
   padding: 0;
-  text-decoration: none;
-  color: #fff;
+  line-height: 16px;
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 13px;
   font-weight: 400;
+  line-height: 16px;
+}
+
+.footer__content-links-item-link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #fff;
 }
 
 .footer__content-links-item:hover {

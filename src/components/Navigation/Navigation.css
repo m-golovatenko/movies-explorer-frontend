@@ -130,7 +130,8 @@
   margin-left: auto;
 }
 
-.navigation__burger {
+.navigation__burger:hover {
+  cursor: pointer;
   opacity: 0.8;
 }
 

@@ -44,7 +44,7 @@ function Navigation({ isLoggedIn, setIsBurgerMenuOpen }) {
               }
             />
           </Link>
-          <button className="navigation__burger" onClick={handleBurgerMenuOpen} />
+          <button className="navigation__burger" onClick={handleBurgerMenuOpen} type="button" />
         </>
       ) : (
         <ul className="navigation__auth">
@@ -53,9 +53,11 @@ function Navigation({ isLoggedIn, setIsBurgerMenuOpen }) {
               Регистрация
             </Link>
           </li>
-          <Link to="/signin" className="navigation__auth-login">
-            Войти
-          </Link>
+          <li>
+            <Link to="/signin" className="navigation__auth-login">
+              Войти
+            </Link>
+          </li>
         </ul>
       )}
     </nav>

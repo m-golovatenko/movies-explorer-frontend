@@ -3,10 +3,10 @@ import './SearchForm.css';
 
 function SearchForm() {
   return (
-    <section className="search">
+    <section className="search" aria-label="search">
       <form className="search__content">
         <label className="search__content-img"></label>
-        <input className="search__bar" placeholder={'Фильм'} />
+        <input className="search__bar" placeholder={'Фильм'} required />
         <div className="search__buttons">
           <button className="search__submit" type="submit">
             Найти

@@ -4,10 +4,10 @@ import './Auth.css';
 
 function Auth(props) {
   return (
-    <section className="auth">
+    <main className="auth">
       <div className="auth__content">
         <Link to="/" className="auth__logo" aria-label="Логотип учебного прокта" />
-        <h2 className="auth__title">{props.titleText}</h2>
+        <h1 className="auth__title">{props.titleText}</h1>
         <form className="auth__form" name={props.formName} noValidate>
           <ul className="auth__form-list">{props.children}</ul>
         </form>
@@ -24,7 +24,7 @@ function Auth(props) {
           </Link>
         </p>
       </div>
-    </section>
+    </main>
   );
 }
 

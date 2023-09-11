@@ -22,40 +22,46 @@ function Profile({ isLoggedIn, setLoggedIn }) {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-      <section className="profile">
+      <main className="profile" aria-label="profile">
         <div className="profile__data">
-          <h2 className="profile__greetings">Привет, Мария!</h2>
-          <ul className="profile__info">
-            <li className="profile__info-item">
-              <label className="profile__info-item-title">Имя</label>
-              <input
-                className={
-                  !isEditing
-                    ? 'profile__info-item-input'
-                    : 'profile__info-item-input profile__info-item-input_active'
-                }
-                type="text"
-                defaultValue="Мария"
-              />
-            </li>
-            <li className="profile__info-item">
-              <label className="profile__info-item-title">E-mail</label>
-              <input
-                className={
-                  !isEditing
-                    ? 'profile__info-item-input'
-                    : 'profile__info-item-input profile__info-item-input_active'
-                }
-                type="email"
-                defaultValue="pochta@yandex.ru"
-              />
-            </li>
-          </ul>
+          <h1 className="profile__greetings">Привет, Мария!</h1>
+          <form name="profile" noValidate>
+            <ul className="profile__info">
+              <li className="profile__info-item">
+                <label className="profile__info-item-title">Имя</label>
+                <input
+                  className={
+                    !isEditing
+                      ? 'profile__info-item-input'
+                      : 'profile__info-item-input profile__info-item-input_active'
+                  }
+                  type="text"
+                  placeholder="Имя"
+                  minLength="2"
+                  maxLength="30"
+                  defaultValue="Мария"
+                />
+              </li>
+              <li className="profile__info-item">
+                <label className="profile__info-item-title">E-mail</label>
+                <input
+                  className={
+                    !isEditing
+                      ? 'profile__info-item-input'
+                      : 'profile__info-item-input profile__info-item-input_active'
+                  }
+                  type="email"
+                  placeholder="E-mail"
+                  defaultValue="pochta@yandex.ru"
+                />
+              </li>
+            </ul>
+          </form>
         </div>
         {!isEditing ? (
           <ul className="profile__links">
             <li>
-              <button className="profile__links-item" onClick={handleEdit}>
+              <button className="profile__links-item" onClick={handleEdit} type="button">
                 Редактировать
               </button>
             </li>
@@ -63,6 +69,7 @@ function Profile({ isLoggedIn, setLoggedIn }) {
               <button
                 onClick={handleLogout}
                 className="profile__links-item profile__links-item_red"
+                type="button"
               >
                 Выйти из аккаунта
               </button>
@@ -71,12 +78,12 @@ function Profile({ isLoggedIn, setLoggedIn }) {
         ) : (
           <div className="profile__edit">
             <p className="profile__error">При обновлении профиля произошла ошибка.</p>
-            <button className="profile__save" onClick={handleSave}>
+            <button className="profile__save" onClick={handleSave} type="submit">
               Сохранить
             </button>
           </div>
         )}
-      </section>
+      </main>
       <Footer />
     </>
   );

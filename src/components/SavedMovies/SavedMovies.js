@@ -10,11 +10,11 @@ function SavedMovies({ isLoggedIn, setLoggedIn }) {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-      <section className="movies">
+      <main className="movies" aria-label="saved-movies">
         <SearchForm />
         <MoviesCardList movies={savedMovies} />
         <Pagination />
-      </section>
+      </main>
       <Footer />
     </>
   );

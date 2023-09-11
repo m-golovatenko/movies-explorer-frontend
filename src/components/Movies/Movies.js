@@ -14,7 +14,7 @@ function Movies({ isLoggedIn, setLoggedIn }) {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-      <section className="movies">
+      <main className="movies" aria-label="movies">
         <SearchForm />
         {!nothingFound ? (
           <MoviesCardList movies={movies} />
@@ -22,7 +22,7 @@ function Movies({ isLoggedIn, setLoggedIn }) {
           <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
         )}
         {!nothingFound ? <Pagination /> : ''}
-      </section>
+      </main>
       <Footer />
     </>
   );
