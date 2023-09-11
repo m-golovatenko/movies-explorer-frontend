@@ -28,3 +28,9 @@
   cursor: pointer;
   opacity: 0.7;
 }
+
+@media (max-width: 540px) {
+  .header__container {
+    padding: 0 14px;
+  }
+}

@@ -98,6 +98,10 @@
 }
 
 @media (max-width: 540px) {
+  .movie__title {
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
   .movie__title-text {
     font-size: 12px;
   }

@@ -52,8 +52,8 @@
 @media (max-width: 540px) {
   .promo__container {
     max-width: 100%;
-    padding: 183px 0 70px;
-    gap: 140px;
+    padding: 183px 0 40px;
+    gap: 60px;
   }
 
   .promo__container-title {

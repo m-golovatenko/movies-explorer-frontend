@@ -164,16 +164,22 @@
 
   .search__short-films {
     display: none;
+    padding-left: 0;
   }
 
   .search__short-films_mobile {
     box-sizing: border-box;
-    margin-top: 46px;
+    margin-top: 45px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 13px;
     width: 100%;
     justify-content: center;
     border: none;
+    height: auto;
+  }
+
+  .search__text {
+    font-size: 11px;
   }
 }

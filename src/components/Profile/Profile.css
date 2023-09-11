@@ -1,5 +1,5 @@
 .profile {
-  padding: 74px 30px 70px;
+  padding: 74px 0 70px;
   width: 410px;
   margin: 0 auto;
   display: flex;
@@ -70,6 +70,10 @@
 
 .profile__info-item-input_active {
   pointer-events: auto;
+}
+
+.profile__info-item-input:focus {
+  outline: 1px solid #4285f4;
 }
 
 .profile__links {
@@ -149,7 +153,7 @@
 
 @media (max-width: 768px) {
   .profile {
-    padding: 236px 30px 269px;
+    padding: 236px 0 269px;
     height: calc(100vh - 269px - 74px);
   }
 
@@ -160,8 +164,8 @@
 
 @media (max-width: 540px) {
   .profile {
-    padding: 70px 30px 40px;
-    width: 210px;
+    padding: 70px 0 40px;
+    width: 260px;
     height: calc(100vh - 70px - 74px - 40px);
   }
 
@@ -171,5 +175,10 @@
 
   .profile__info-item-title {
     width: 130px;
+  }
+
+  .profile__links-item {
+    font-size: 12px;
+    line-height: 15px;
   }
 }

@@ -121,6 +121,7 @@
   .about-project__list-item-title {
     font-size: 18px;
     letter-spacing: -0.72px;
+    line-height: 22px;
   }
 
   .about-project__list-item-text {
