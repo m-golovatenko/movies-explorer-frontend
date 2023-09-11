@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import './Movies.css';
 import SearchForm from '../Elements/SearchForm/SearchForm';
 import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
@@ -8,13 +9,19 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function Movies({ isLoggedIn, setLoggedIn }) {
+  // eslint-disable-next-line
+  const [nothingFound, setIsNothingFound] = useState(false);
   return (
     <>
       <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       <section className="movies">
         <SearchForm />
-        <MoviesCardList movies={movies} />
-        <Pagination />
+        {!nothingFound ? (
+          <MoviesCardList movies={movies} />
+        ) : (
+          <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
+        )}
+        {!nothingFound ? <Pagination /> : ''}
       </section>
       <Footer />
     </>

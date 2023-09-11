@@ -11,7 +11,7 @@ function Footer() {
       <div className="footer__content">
         <p className="footer__content-copyright">&copy; 2023</p>
         <ul className="footer__content-links">
-          <li>
+          <li className="footer__content-links-item">
             <a
               href="https://practicum.yandex.ru/"
               target="_blank"
@@ -22,7 +22,7 @@ function Footer() {
             </a>
           </li>
 
-          <li>
+          <li className="footer__content-links-item">
             <a
               href="https://github.com/m-golovatenko"
               target="_blank"

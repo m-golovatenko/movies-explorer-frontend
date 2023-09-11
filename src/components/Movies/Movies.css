@@ -7,6 +7,20 @@
   gap: 10px;
 }
 
+.movies__nothing {
+  width: 100%;
+  margin: 0;
+  height: calc(100vh - 142px - 70px - 74px - 172px);
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 22px;
+  line-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8b8b8b;
+}
+
 @media (max-width: 768px) {
   .movies {
     padding-top: 80px;
@@ -16,5 +30,10 @@
 @media (max-width: 540px) {
   .movies {
     padding: 40px 10px 0;
+  }
+
+  .movies__nothing {
+    font-size: 18px;
+    line-height: 26px;
   }
 }

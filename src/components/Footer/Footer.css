@@ -20,6 +20,7 @@
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 13px;
   font-weight: 400;
+  line-height: 16px;
 }
 
 .footer__content {
@@ -35,6 +36,7 @@
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 13px;
   font-weight: 400;
+  line-height: 16px;
 }
 
 .footer__content-links {
@@ -84,6 +86,7 @@
     order: 2;
     color: #8b8b8b;
     font-size: 12px;
+    line-height: 15px;
   }
 
   .footer__content-links {
@@ -94,5 +97,6 @@
 
   .footer__content-links-item {
     font-size: 12px;
+    line-height: 15px;
   }
 }
