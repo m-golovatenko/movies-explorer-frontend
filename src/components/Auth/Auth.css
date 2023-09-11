@@ -60,6 +60,7 @@
 
 .auth__save-button:hover {
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .auth__text {

@@ -12,6 +12,7 @@ import Footer from '../Footer/Footer';
 import './App.css';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 function App() {
   const location = useLocation();
@@ -24,7 +25,7 @@ function App() {
         <title>Movies Explorer</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      {location.pathname !== '/signup' && location.pathname !== '/signin' ? (
+      {location.pathname !== '/signup' && location.pathname !== '/signin' && !NotFoundPage ? (
         <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       ) : (
         ''
@@ -36,8 +37,13 @@ function App() {
         <Route path="/profile" element={<Profile setLoggedIn={setLoggedIn} />}></Route>
         <Route path="/signin" element={<Login />}></Route>
         <Route path="/signup" element={<Register />}></Route>
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-      {location.pathname !== '/signup' && location.pathname !== '/signin' ? <Footer /> : ''}
+      {location.pathname !== '/signup' && location.pathname !== '/signin' && !NotFoundPage ? (
+        <Footer />
+      ) : (
+        ''
+      )}
     </div>
   );
 }
