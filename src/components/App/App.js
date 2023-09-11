@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '..//Movies/Movies';
@@ -15,13 +14,6 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);
   return (
     <div className="root">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="description" content="Учебное приложение для поиска фильмов." />
-        <title>Movies Explorer</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
-
       <Routes>
         <Route path="/" element={<Main isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
         <Route

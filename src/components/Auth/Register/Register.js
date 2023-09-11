@@ -13,6 +13,7 @@ function Register() {
       path="/signin"
     >
       <InputElement
+        inputId="auth__input-name"
         labelText="Имя"
         type="text"
         name="name"
@@ -23,6 +24,7 @@ function Register() {
       />
 
       <InputElement
+        inputId="auth__input-email"
         labelText="E-mail"
         type="email"
         name="email"
@@ -33,6 +35,7 @@ function Register() {
       />
 
       <InputElement
+        inputId="auth__input-password"
         labelText="Пароль"
         type="password"
         name="password"

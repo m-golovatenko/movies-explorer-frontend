@@ -13,6 +13,7 @@ function Login() {
       path="/signup"
     >
       <InputElement
+        inputId="auth__input-email"
         labelText="E-mail"
         type="email"
         name="email"
@@ -23,6 +24,7 @@ function Login() {
       />
 
       <InputElement
+        inputId="auth__input-password"
         labelText="Пароль"
         type="password"
         name="password"

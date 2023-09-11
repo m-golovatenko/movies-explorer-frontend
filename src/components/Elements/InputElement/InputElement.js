@@ -10,7 +10,7 @@ function InputElement(props) {
     <li className="auth__form-list-item">
       <label className="auth__label">{props.labelText}</label>
       <input
-        id="auth__input-name"
+        id={props.inputId}
         className="auth__input auth__input_type_name"
         type={props.type}
         name={props.name}
