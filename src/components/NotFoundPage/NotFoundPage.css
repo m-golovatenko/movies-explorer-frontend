@@ -46,8 +46,8 @@
 
 @media (max-width: 768px) {
   .page-not-found {
-    padding-bottom: 222px;
-    height: calc(100vh - 246px - 222px);
+    padding: 408px 10px 222px;
+    height: calc(100vh - 630px);
   }
 }
 
