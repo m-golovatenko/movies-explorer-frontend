@@ -1,5 +1,7 @@
 .movies {
-  max-width: 1140px;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin: 0 auto;

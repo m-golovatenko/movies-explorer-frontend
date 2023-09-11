@@ -9,6 +9,10 @@
   justify-content: center;
 }
 
+.movies-list:last-child::after {
+  content: ' ';
+}
+
 @media (max-width: 768px) {
   .movies-list {
     grid-template-columns: repeat(auto-fit, 339px);
