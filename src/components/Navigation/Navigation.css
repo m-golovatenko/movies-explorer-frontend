@@ -38,7 +38,7 @@
 }
 
 .navigation__acc:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .navigation__acc_blue {
@@ -113,7 +113,7 @@
 
 .navigation__auth-login:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .navigation__burger {
