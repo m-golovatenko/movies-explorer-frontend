@@ -1,0 +1,125 @@
+.burger-menu {
+  width: 100%;
+  position: relative;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity 0.2s ease-out;
+  opacity: 0.01;
+  z-index: 20;
+  display: none;
+}
+
+.burger-menu_active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.burger-menu__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.burger-menu__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: calc(100% - 248px);
+  background: #202020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  z-index: 99999;
+}
+
+.burger-menu__links {
+  margin: 159px auto 0;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.burger-menu__button-close {
+  background-image: url('../../../images/close-icon.svg');
+  width: 22px;
+  height: 22px;
+  background-color: transparent;
+  object-fit: contain;
+  border: none;
+  background-size: 22px 22px;
+  position: absolute;
+  top: 22.44px;
+  right: 22.44px;
+}
+
+.burger-menu__button-close:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.burger-menu__acc {
+  display: flex;
+  gap: 7px;
+  text-decoration: none;
+  align-items: center;
+  border-radius: 40px;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  background: #202020;
+  padding: 3px 3px 3px 11px;
+  margin-bottom: 90px;
+}
+
+.burger-menu__acc:hover {
+  opacity: 0.7;
+}
+
+.burger-menu__acc-text {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+.burger-menu__acc-img {
+  padding: 7px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #313131;
+}
+
+@media (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 540px) {
+  .burger-menu__container {
+    width: 100%;
+  }
+
+  .burger-menu__links {
+    margin: 144px auto 0;
+    gap: 24px;
+  }
+
+  .button-close {
+    top: 13.44px;
+    right: 13.44px;
+  }
+
+  .burger-menu__acc {
+    margin-bottom: 46px;
+  }
+}

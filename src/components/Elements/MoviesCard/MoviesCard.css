@@ -1,0 +1,116 @@
+.movie {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__title {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+
+.movie__img {
+  width: 100%;
+  height: 151px;
+  object-fit: contain;
+}
+
+.movie__title-text {
+  max-width: 226px;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+  min-height: 32px;
+}
+
+.movie__duration {
+  margin: 0;
+  padding: 0;
+  color: #8b8b8b;
+  font-size: 11px;
+  font-weight: 400;
+  padding-top: 6px;
+  border-top: 1px solid #424242;
+}
+
+.movie__like {
+  border: none;
+  width: 24px;
+  height: 24px;
+  background-color: #313131;
+  border-radius: 50%;
+  background-image: url('../../../images/like.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.movie__like:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.movie__like_active {
+  background-image: url('../../../images/like_active.svg');
+}
+
+.movie__delete {
+  border: none;
+  width: 24px;
+  height: 24px;
+  background-color: #313131;
+  border-radius: 50%;
+  background-image: url('../../../images/delete.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  display: none;
+}
+
+.movie__delete:hover {
+  display: block;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.movie__delete_active {
+  display: inline-block;
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .movie__title {
+    margin-bottom: 29px;
+  }
+
+  .movie__img {
+    height: 190px;
+  }
+
+  .movie__title-text {
+    max-width: 295px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 540px) {
+  .movie__title {
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+  .movie__title-text {
+    font-size: 12px;
+  }
+
+  .movie__img {
+    height: 168px;
+  }
+
+  .movie__duration {
+    font-size: 10px;
+  }
+}
