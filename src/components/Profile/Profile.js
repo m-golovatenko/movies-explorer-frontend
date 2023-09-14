@@ -4,8 +4,10 @@ import { useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
+  const currentUser = React.useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
       <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       <main className="profile" aria-label="profile">
         <div className="profile__data">
-          <h1 className="profile__greetings">Привет, Мария!</h1>
+          <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>
           <form name="profile" noValidate>
             <ul className="profile__info">
               <li className="profile__info-item">
@@ -44,7 +46,7 @@ function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
                   placeholder="Имя"
                   minLength="2"
                   maxLength="30"
-                  defaultValue="Мария"
+                  defaultValue={currentUser.name}
                 />
               </li>
               <li className="profile__info-item">
@@ -57,7 +59,7 @@ function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
                   }
                   type="email"
                   placeholder="E-mail"
-                  defaultValue="pochta@yandex.ru"
+                  defaultValue={currentUser.email}
                 />
               </li>
             </ul>

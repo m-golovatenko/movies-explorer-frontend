@@ -11,6 +11,7 @@ import './App.css';
 import { useState } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { authApi } from '../../utils/AuthApi';
+import { mainApi } from '../../utils/MainApi';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -38,6 +39,18 @@ function App() {
     checkToken();
     // eslint-disable-next-line
   }, []);
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (isLoggedIn) {
+      mainApi
+        .getCurrentUser(jwt)
+        .then(userData => {
+          setCurrentUser(userData);
+        })
+        .catch(err => console.error(`Что-то пошло не так: ${err}`));
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
