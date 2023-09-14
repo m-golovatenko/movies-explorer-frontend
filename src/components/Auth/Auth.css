@@ -7,13 +7,13 @@
   flex-direction: column;
   box-sizing: border-box;
   height: 100vh;
-  justify-content: space-between;
 }
 
 .auth__content {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  height: 100%;
 }
 
 .auth__logo {
@@ -36,7 +36,17 @@
   font-weight: 500;
 }
 
+.auth__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 0;
+  justify-content: space-between;
+}
+
 .auth__form-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -46,6 +56,7 @@
 }
 
 .auth__buttons {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
