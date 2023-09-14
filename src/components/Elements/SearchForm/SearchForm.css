@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.search__content:focus-within {
+  outline: 1px solid #4285f4;
+}
+
 .search__bar {
   border: none;
   outline: none;
