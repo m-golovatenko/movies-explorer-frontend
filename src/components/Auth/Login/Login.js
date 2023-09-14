@@ -4,7 +4,7 @@ import InputElement from '../../Elements/InputElement/InputElement';
 import { authApi } from '../../../utils/AuthApi';
 import { useNavigate } from 'react-router-dom';
 
-function Login({handleLogin}) {
+function Login({ handleLogin, setCurrentUser }) {
   const [formValue, setFormValue] = React.useState({ password: '', email: '' });
   const navigate = useNavigate();
 
@@ -24,12 +24,14 @@ function Login({handleLogin}) {
       .login(password, email)
       .then(data => {
         localStorage.setItem('jwt', data.token);
+        setCurrentUser(true);
         handleLogin();
-        navigate('/movies');
+        navigate('/');
       })
 
       .catch(err => {
-        console.error(`Ошибка при входе. Код ошибки: ${err}`)});
+        console.error(`Ошибка при входе. Код ошибки: ${err}`);
+      });
   }
 
   return (

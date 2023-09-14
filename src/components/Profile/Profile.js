@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
-function Profile({ isLoggedIn, setLoggedIn }) {
+function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
@@ -18,9 +18,10 @@ function Profile({ isLoggedIn, setLoggedIn }) {
   }
 
   function handleLogout() {
-      localStorage.removeItem('jwt');
-      setLoggedIn(false);
-      navigate('/signin');
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    setCurrentUser({});
+    navigate('/signin');
   }
 
   return (
