@@ -8,12 +8,11 @@ function Auth(props) {
       <div className="auth__content">
         <Link to="/" className="auth__logo" aria-label="Логотип учебного прокта" />
         <h1 className="auth__title">{props.titleText}</h1>
-        <form className="auth__form" name={props.formName} noValidate>
+        <form className="auth__form" name={props.formName} onSubmit={props.handleSubmit} noValidate>
           <ul className="auth__form-list">{props.children}</ul>
-        </form>
-      </div>
-      <div className="auth__buttons">
-        <button className="auth__save-button" type="submit" aria-label="Зарегистрироваться">
+        
+        <div className="auth__buttons">
+        <button className="auth__save-button" type="submit" aria-label="Зарегистрироваться" >
           {props.buttonText}
         </button>
 
@@ -24,6 +23,9 @@ function Auth(props) {
           </Link>
         </p>
       </div>
+      </form>
+      </div>
+      
     </main>
   );
 }

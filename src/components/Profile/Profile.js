@@ -3,9 +3,11 @@ import './Profile.css';
 import { useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 function Profile({ isLoggedIn, setLoggedIn }) {
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   function handleEdit() {
     setIsEditing(true);
@@ -16,7 +18,9 @@ function Profile({ isLoggedIn, setLoggedIn }) {
   }
 
   function handleLogout() {
-    setLoggedIn(false);
+      localStorage.removeItem('jwt');
+      setLoggedIn(false);
+      navigate('/signin');
   }
 
   return (

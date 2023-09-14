@@ -116,4 +116,7 @@ const savedMovies = [
   }
 ];
 
-export { movies, savedMovies };
+const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+const MAIN_URL = 'http://localhost:3001';
+
+export { movies, savedMovies, MOVIES_URL, MAIN_URL };

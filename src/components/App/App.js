@@ -11,7 +11,7 @@ import { useState } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   return (
     <div className="root">
       <Routes>
@@ -28,7 +28,7 @@ function App() {
           path="/profile"
           element={<Profile setLoggedIn={setLoggedIn} isLoggedIn={isLoggedIn} />}
         ></Route>
-        <Route path="/signin" element={<Login />}></Route>
+        <Route path="/signin" element={<Login  handleLogin={() => setLoggedIn(true)}/>}></Route>
         <Route path="/signup" element={<Register />}></Route>
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

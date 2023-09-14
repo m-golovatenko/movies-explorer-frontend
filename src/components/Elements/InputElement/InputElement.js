@@ -19,6 +19,8 @@ function InputElement(props) {
         maxLength={props.maxLength}
         required
         autoComplete={props.autoComplete}
+        value={props.value}
+        onChange={props.handleChange}
       />
 
       <span
