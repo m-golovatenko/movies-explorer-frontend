@@ -16,6 +16,7 @@ import { mainApi } from '../../utils/MainApi';
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [formValue, setFormValue] = React.useState({ password: '', email: '' });
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function App() {
           return;
         }
         setLoggedIn(true);
+        setCurrentUser(data);
         navigate('/movies', { replace: true });
       })
       .catch(e => {
@@ -51,6 +53,39 @@ function App() {
         .catch(err => console.error(`Что-то пошло не так: ${err}`));
     }
   }, [isLoggedIn]);
+
+  function handleSubmitLogin({ password, email }) {
+    authApi
+      .login(password, email)
+      .then(data => {
+        localStorage.setItem('jwt', data.token);
+        checkToken();
+      })
+
+      .catch(err => {
+        console.error(`Ошибка при входе. Код ошибки: ${err}`);
+      });
+  }
+
+  function handleSubmitRegister({ password, email, name }) {
+    authApi
+      .register(password, email, name)
+      .then(() => {
+        handleSubmitLogin({ password, email });
+      })
+      .catch(e => {
+        console.error(`Ошибка при регистрации пользователя: код ошибки (${e})`);
+      });
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -78,10 +113,23 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login handleLogin={() => setLoggedIn(true)} setCurrentUser={setCurrentUser} />
+              <Login
+                handleSubmitLogin={handleSubmitLogin}
+                handleChange={handleChange}
+                formValue={formValue}
+              />
             }
           ></Route>
-          <Route path="/signup" element={<Register />}></Route>
+          <Route
+            path="/signup"
+            element={
+              <Register
+                handleSubmitRegister={handleSubmitRegister}
+                handleChange={handleChange}
+                formValue={formValue}
+              />
+            }
+          ></Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>

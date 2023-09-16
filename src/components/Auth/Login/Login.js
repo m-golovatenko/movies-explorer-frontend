@@ -1,37 +1,11 @@
 import React from 'react';
 import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
-import { authApi } from '../../../utils/AuthApi';
-import { useNavigate } from 'react-router-dom';
 
-function Login({ handleLogin, setCurrentUser }) {
-  const [formValue, setFormValue] = React.useState({ password: '', email: '' });
-  const navigate = useNavigate();
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
+function Login({ handleSubmitLogin, handleChange, formValue }) {
   function handleSubmit(e) {
     e.preventDefault();
-    const { password, email } = formValue;
-
-    authApi
-      .login(password, email)
-      .then(data => {
-        localStorage.setItem('jwt', data.token);
-        setCurrentUser(true);
-        handleLogin();
-        navigate('/');
-      })
-
-      .catch(err => {
-        console.error(`Ошибка при входе. Код ошибки: ${err}`);
-      });
+    handleSubmitLogin(formValue);
   }
 
   return (

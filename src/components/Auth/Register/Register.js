@@ -1,34 +1,11 @@
 import React from 'react';
 import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
-import { authApi } from '../../../utils/AuthApi';
-import { useNavigate } from 'react-router-dom';
 
-
-function Register() {
-  const [formValue, setFormValue] = React.useState({ password: '', email: '', name: '' });
-  const navigate = useNavigate();
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
-  function handleRegister(e) {
+function Register({ handleSubmitRegister, handleChange, formValue }) {
+  function handleSubmit(e) {
     e.preventDefault();
-    const { password, email, name } = formValue;
-    authApi
-      .register(password, email, name)
-      .then(() => {
-        navigate('/signin');
-      })
-      .catch(e => {
-        console.error(`Ошибка при регистрации пользователя: код ошибки (${e})`);
-      });
+    handleSubmitRegister(formValue);
   }
 
   return (
@@ -39,7 +16,7 @@ function Register() {
       titleText="Добро пожаловать!"
       buttonText="Зарегистрироваться"
       path="/signin"
-      handleSubmit={handleRegister}
+      handleSubmit={handleSubmit}
     >
       <InputElement
         inputId="auth__input-name"

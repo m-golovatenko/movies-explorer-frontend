@@ -20,10 +20,10 @@ function Profile({ isLoggedIn, setLoggedIn, setCurrentUser }) {
   }
 
   function handleLogout() {
-    localStorage.removeItem('jwt');
+    localStorage.clear();
     setLoggedIn(false);
     setCurrentUser({});
-    navigate('/signin');
+    navigate('/');
   }
 
   return (
