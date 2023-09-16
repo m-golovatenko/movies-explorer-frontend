@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from '../Main/Main';
 import Movies from '..//Movies/Movies';
@@ -7,6 +7,8 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Auth/Login/Login';
 import Register from '../Auth/Register/Register';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './App.css';
 import { useState } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
@@ -18,6 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [formValue, setFormValue] = React.useState({ password: '', email: '' });
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   function checkToken() {
@@ -30,10 +33,13 @@ function App() {
         }
         setLoggedIn(true);
         setCurrentUser(data);
-        navigate('/movies', { replace: true });
+        if (location.pathname === '/signin' || location.pathname === '/signup') {
+          navigate('/movies', { replace: true });
+        }
       })
       .catch(e => {
         setLoggedIn(false);
+        console.error(`Что-то пошло не так: ${e}`);
       });
   }
 
@@ -90,26 +96,23 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
+        {location.pathname === '/' ||
+        location.pathname === '/movies' ||
+        location.pathname === '/saved-movies' ||
+        location.pathname === '/profile' ? (
+          <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+        ) : (
+          ''
+        )}
         <Routes>
-          <Route path="/" element={<Main isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-          <Route
-            path="/movies"
-            element={<Movies isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />}
-          ></Route>
-          <Route
-            path="/saved-movies"
-            element={<SavedMovies isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />}
-          ></Route>
+          <Route path="/" element={<Main />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
           <Route
             path="/profile"
-            element={
-              <Profile
-                setLoggedIn={setLoggedIn}
-                isLoggedIn={isLoggedIn}
-                setCurrentUser={setCurrentUser}
-              />
-            }
-          ></Route>
+            element={<Profile setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser} />}
+          />
+
           <Route
             path="/signin"
             element={
@@ -119,7 +122,7 @@ function App() {
                 formValue={formValue}
               />
             }
-          ></Route>
+          />
           <Route
             path="/signup"
             element={
@@ -129,9 +132,18 @@ function App() {
                 formValue={formValue}
               />
             }
-          ></Route>
+          />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
+
+        {location.pathname === '/' ||
+        location.pathname === '/movies' ||
+        location.pathname === '/saved-movies' ||
+        location.pathname === '/profile' ? (
+          <Footer />
+        ) : (
+          ''
+        )}
       </div>
     </CurrentUserContext.Provider>
   );
