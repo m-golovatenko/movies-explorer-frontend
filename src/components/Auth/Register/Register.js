@@ -1,12 +1,19 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
+import { useFormWithValidation } from '../../../hooks/useValidation';
 
-function Register({ handleSubmitRegister, handleChange, formValue }) {
+function Register({ handleSubmitRegister }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
   function handleSubmit(e) {
     e.preventDefault();
-    handleSubmitRegister(formValue);
+    handleSubmitRegister(values);
   }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <Auth
@@ -17,6 +24,9 @@ function Register({ handleSubmitRegister, handleChange, formValue }) {
       buttonText="Зарегистрироваться"
       path="/signin"
       handleSubmit={handleSubmit}
+      buttonClasName={
+        isValid ? 'auth__save-button' : 'auth__save-button auth__save-button_disabled'
+      }
     >
       <InputElement
         inputId="auth__input-name"
@@ -27,8 +37,10 @@ function Register({ handleSubmitRegister, handleChange, formValue }) {
         minLength="2"
         maxLength="30"
         autoComplete="off"
-        value={formValue.name || ''}
+        value={values.name || ''}
         handleChange={handleChange}
+        errorText={errors.name}
+        pattern="^[a-zA-Zа-яА-ЯЁёs\-]+$"
       />
 
       <InputElement
@@ -40,8 +52,9 @@ function Register({ handleSubmitRegister, handleChange, formValue }) {
         minLength="2"
         maxLength="30"
         autoComplete="email"
-        value={formValue.email || ''}
+        value={values.email || ''}
         handleChange={handleChange}
+        errorText={errors.email}
       />
 
       <InputElement
@@ -53,8 +66,9 @@ function Register({ handleSubmitRegister, handleChange, formValue }) {
         minLength="6"
         maxLength="30"
         autoComplete="off"
-        value={formValue.password || ''}
+        value={values.password || ''}
         handleChange={handleChange}
+        errorText={errors.password}
       />
     </Auth>
   );

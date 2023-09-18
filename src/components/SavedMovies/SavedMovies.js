@@ -4,7 +4,7 @@ import SearchForm from '../Elements/SearchForm/SearchForm';
 import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import Pagination from '../Pagination/Pagination';
 
-function SavedMovies({ isLoggedIn, setLoggedIn }) {
+function SavedMovies() {
   return (
     <main className="movies" aria-label="saved-movies">
       <SearchForm />

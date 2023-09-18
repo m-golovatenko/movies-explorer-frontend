@@ -18,7 +18,6 @@ import { mainApi } from '../../utils/MainApi';
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [formValue, setFormValue] = React.useState({ password: '', email: '' });
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,15 +83,6 @@ function App() {
       });
   }
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
@@ -113,33 +103,17 @@ function App() {
             element={<Profile setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser} />}
           />
 
-          <Route
-            path="/signin"
-            element={
-              <Login
-                handleSubmitLogin={handleSubmitLogin}
-                handleChange={handleChange}
-                formValue={formValue}
-              />
-            }
-          />
+          <Route path="/signin" element={<Login handleSubmitLogin={handleSubmitLogin} />} />
           <Route
             path="/signup"
-            element={
-              <Register
-                handleSubmitRegister={handleSubmitRegister}
-                handleChange={handleChange}
-                formValue={formValue}
-              />
-            }
+            element={<Register handleSubmitRegister={handleSubmitRegister} />}
           />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
 
         {location.pathname === '/' ||
         location.pathname === '/movies' ||
-        location.pathname === '/saved-movies' ||
-        location.pathname === '/profile' ? (
+        location.pathname === '/saved-movies' ? (
           <Footer />
         ) : (
           ''

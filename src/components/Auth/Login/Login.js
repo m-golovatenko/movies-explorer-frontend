@@ -1,12 +1,19 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
+import { useFormWithValidation } from '../../../hooks/useValidation';
 
-function Login({ handleSubmitLogin, handleChange, formValue }) {
+function Login({ handleSubmitLogin }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
   function handleSubmit(e) {
     e.preventDefault();
-    handleSubmitLogin(formValue);
+    handleSubmitLogin(values);
   }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <Auth
@@ -17,6 +24,9 @@ function Login({ handleSubmitLogin, handleChange, formValue }) {
       buttonText="Войти"
       path="/signup"
       handleSubmit={handleSubmit}
+      buttonClasName={
+        isValid ? 'auth__save-button' : 'auth__save-button auth__save-button_disabled'
+      }
     >
       <InputElement
         inputId="auth__input-email"
@@ -27,8 +37,9 @@ function Login({ handleSubmitLogin, handleChange, formValue }) {
         minLength="2"
         maxLength="30"
         autoComplete="email"
-        value={formValue.email || ''}
+        value={values.email || ''}
         handleChange={handleChange}
+        errorText={errors.email}
       />
 
       <InputElement
@@ -40,8 +51,9 @@ function Login({ handleSubmitLogin, handleChange, formValue }) {
         minLength="6"
         maxLength="30"
         autoComplete="off"
-        value={formValue.password || ''}
+        value={values.password || ''}
         handleChange={handleChange}
+        errorText={errors.password}
       />
     </Auth>
   );

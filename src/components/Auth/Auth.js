@@ -10,22 +10,21 @@ function Auth(props) {
         <h1 className="auth__title">{props.titleText}</h1>
         <form className="auth__form" name={props.formName} onSubmit={props.handleSubmit} noValidate>
           <ul className="auth__form-list">{props.children}</ul>
-        
-        <div className="auth__buttons">
-        <button className="auth__save-button" type="submit" aria-label="Зарегистрироваться" >
-          {props.buttonText}
-        </button>
 
-        <p className="auth__text">
-          {props.authText}
-          <Link to={props.path} className="auth__link">
-            {props.linkText}
-          </Link>
-        </p>
+          <div className="auth__buttons">
+            <button className={props.buttonClasName} type="submit" aria-label="Зарегистрироваться">
+              {props.buttonText}
+            </button>
+
+            <p className="auth__text">
+              {props.authText}
+              <Link to={props.path} className="auth__link">
+                {props.linkText}
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
-      </form>
-      </div>
-      
     </main>
   );
 }

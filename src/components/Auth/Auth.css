@@ -80,6 +80,12 @@
   cursor: pointer;
 }
 
+.auth__save-button_disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
+  pointer-events: none;
+}
+
 .auth__text {
   margin: 0;
   padding: 0;
