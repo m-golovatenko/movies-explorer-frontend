@@ -1,13 +1,16 @@
 import React from 'react';
 import './Profile.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../hooks/useValidation';
 
 function Profile({ setLoggedIn, setCurrentUser }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+  const [isChanged, setIsChanged] = useState(false);
 
   function handleEdit() {
     setIsEditing(true);
@@ -24,6 +27,18 @@ function Profile({ setLoggedIn, setCurrentUser }) {
     navigate('/');
   }
 
+  useEffect(() => {
+    resetForm({ name: currentUser.name, email: currentUser.email });
+  }, [resetForm, currentUser]);
+
+  useEffect(() => {
+    if (values.name !== currentUser.name || values.email !== currentUser.email) {
+      setIsChanged(true);
+    } else {
+      setIsChanged(false);
+    }
+  }, [currentUser, values]);
+
   return (
     <main className="profile" aria-label="profile">
       <div className="profile__data">
@@ -31,32 +46,50 @@ function Profile({ setLoggedIn, setCurrentUser }) {
         <form name="profile" noValidate>
           <ul className="profile__info">
             <li className="profile__info-item">
-              <label className="profile__info-item-title">Имя</label>
-              <input
-                className={
-                  !isEditing
-                    ? 'profile__info-item-input'
-                    : 'profile__info-item-input profile__info-item-input_active'
-                }
-                type="text"
-                placeholder="Имя"
-                minLength="2"
-                maxLength="30"
-                defaultValue={currentUser.name}
-              />
+              <div className="profile__info-item-content">
+                <label className="profile__info-item-title">Имя</label>
+                <input
+                  className={
+                    !isEditing
+                      ? 'profile__info-item-input'
+                      : 'profile__info-item-input profile__info-item-input_active'
+                  }
+                  type="text"
+                  name="name"
+                  placeholder="Имя"
+                  minLength="2"
+                  maxLength="30"
+                  value={values.name || ''}
+                  onChange={handleChange}
+                  pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
+                  required
+                />
+              </div>
+              <span className={isValid ? 'profile__error' : 'profile__error profile__error_active'}>
+                {errors.name}
+              </span>
             </li>
+
             <li className="profile__info-item">
-              <label className="profile__info-item-title">E-mail</label>
-              <input
-                className={
-                  !isEditing
-                    ? 'profile__info-item-input'
-                    : 'profile__info-item-input profile__info-item-input_active'
-                }
-                type="email"
-                placeholder="E-mail"
-                defaultValue={currentUser.email}
-              />
+              <div className="profile__info-item-content">
+                <label className="profile__info-item-title">E-mail</label>
+                <input
+                  className={
+                    !isEditing
+                      ? 'profile__info-item-input'
+                      : 'profile__info-item-input profile__info-item-input_active'
+                  }
+                  type="email"
+                  placeholder="E-mail"
+                  name="email"
+                  value={values.email || ''}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <span className={isValid ? 'profile__error' : 'profile__error profile__error_active'}>
+                {errors.email}
+              </span>
             </li>
           </ul>
         </form>
@@ -81,7 +114,13 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       ) : (
         <div className="profile__edit">
           <p className="profile__error">При обновлении профиля произошла ошибка.</p>
-          <button className="profile__save" onClick={handleSave} type="submit">
+          <button
+            className={
+              isValid && isChanged ? 'profile__save' : 'profile__save profile__save_disabled'
+            }
+            onClick={handleSave}
+            type="submit"
+          >
             Сохранить
           </button>
         </div>
