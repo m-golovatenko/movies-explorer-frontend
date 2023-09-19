@@ -17,7 +17,7 @@ import { mainApi } from '../../utils/MainApi';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = useState({});
 
   const location = useLocation();
   const navigate = useNavigate();

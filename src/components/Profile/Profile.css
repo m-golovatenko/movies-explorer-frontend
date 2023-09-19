@@ -49,7 +49,6 @@
 .profile__info-item-content {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 
 .profile__info-item-title {

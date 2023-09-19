@@ -40,7 +40,7 @@ function Register({ handleSubmitRegister }) {
         value={values.name || ''}
         handleChange={handleChange}
         errorText={errors.name}
-        pattern="^[a-zA-Zа-яА-ЯЁёs\-]+$"
+        pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
       />
 
       <InputElement

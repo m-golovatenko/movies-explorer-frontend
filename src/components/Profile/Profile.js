@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useValidation';
+import { mainApi } from '../../utils/MainApi';
 
 function Profile({ setLoggedIn, setCurrentUser }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -16,8 +17,14 @@ function Profile({ setLoggedIn, setCurrentUser }) {
     setIsEditing(true);
   }
 
-  function handleSave() {
-    setIsEditing(false);
+  function handleUpdateUser(userData) {
+    const jwt = localStorage.getItem('jwt');
+    mainApi
+      .changeUserInfo(userData, jwt)
+      .then(newUserData => {
+        setCurrentUser(newUserData);
+      })
+      .catch(err => console.error(`Ошибка при изменении данных пользователя: ${err}`));
   }
 
   function handleLogout() {
@@ -38,6 +45,12 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       setIsChanged(false);
     }
   }, [currentUser, values]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setIsEditing(false);
+    handleUpdateUser(values);
+  }
 
   return (
     <main className="profile" aria-label="profile">
@@ -118,7 +131,7 @@ function Profile({ setLoggedIn, setCurrentUser }) {
             className={
               isValid && isChanged ? 'profile__save' : 'profile__save profile__save_disabled'
             }
-            onClick={handleSave}
+            onClick={handleSubmit}
             type="submit"
           >
             Сохранить
