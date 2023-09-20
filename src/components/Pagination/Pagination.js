@@ -2,7 +2,7 @@ import React from 'react';
 import './Pagination.css';
 import { useLocation } from 'react-router-dom';
 
-function Pagination() {
+function Pagination({ loadMore }) {
   const location = useLocation();
   return (
     <section className="pagination" aria-label="pagination">
@@ -13,6 +13,7 @@ function Pagination() {
             : 'pagination__button pagination__button_hidden'
         }
         type="button"
+        onClick={loadMore}
       >
         Ещё
       </button>

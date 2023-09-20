@@ -1,7 +1,7 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import './MoviesCard.css';
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getTimeFromMins } from '../../../utils/utils';
 
 function MoviesCard({ movie }) {
   const [isLiked, setIsLiked] = useState(null);
@@ -41,7 +41,7 @@ function MoviesCard({ movie }) {
           ></button>
         )}
       </div>
-      <p className="movie__duration">{movie.duration}</p>
+      <p className="movie__duration">{getTimeFromMins(movie.duration)}</p>
     </li>
   );
 }
