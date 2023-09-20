@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ img, title, duration }) {
+function MoviesCard({ movie }) {
   const [isLiked, setIsLiked] = useState(null);
   const location = useLocation();
 
@@ -13,9 +13,15 @@ function MoviesCard({ img, title, duration }) {
 
   return (
     <li className="movie">
-      <img src={img} alt={title} className="movie__img" />
+      <a href={movie.trailerLink} className="movie__trailer" target="_blank" rel="noreferrer">
+        <img
+          src={`https://api.nomoreparties.co${movie.image.url}`}
+          alt={movie.nameRU || movie.nameEn}
+          className="movie__img"
+        />
+      </a>
       <div className="movie__title">
-        <h2 className="movie__title-text">{title}</h2>
+        <h2 className="movie__title-text">{movie.nameRU}</h2>
         {location.pathname === '/movies' ? (
           <button
             className={!isLiked ? 'movie__like' : 'movie__like movie__like_active'}
@@ -35,7 +41,7 @@ function MoviesCard({ img, title, duration }) {
           ></button>
         )}
       </div>
-      <p className="movie__duration">{duration}</p>
+      <p className="movie__duration">{movie.duration}</p>
     </li>
   );
 }

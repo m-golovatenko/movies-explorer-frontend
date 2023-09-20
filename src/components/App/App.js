@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from '../Main/Main';
@@ -10,14 +10,15 @@ import Register from '../Auth/Register/Register';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './App.css';
-import { useState } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { authApi } from '../../utils/AuthApi';
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [initialMovies, setInitialMovies] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,12 +43,12 @@ function App() {
       });
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
     // eslint-disable-next-line
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (isLoggedIn) {
       mainApi
@@ -56,6 +57,18 @@ function App() {
           setCurrentUser(userData);
         })
         .catch(err => console.error(`Что-то пошло не так: ${err}`));
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      moviesApi
+        .getAllMovies()
+        .then(movies => {
+          localStorage.setItem('movies', JSON.stringify(movies));
+          setInitialMovies(movies);
+        })
+        .catch(e => console.error('Ошибка при получении фильмов'));
     }
   }, [isLoggedIn]);
 
@@ -96,7 +109,7 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies" element={<Movies initialMovies={initialMovies} />} />
           <Route path="/saved-movies" element={<SavedMovies />} />
           <Route
             path="/profile"

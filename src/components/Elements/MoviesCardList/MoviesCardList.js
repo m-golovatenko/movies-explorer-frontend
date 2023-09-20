@@ -7,14 +7,7 @@ function MoviesCardList({ movies, type }) {
     <section aria-label="movie-list">
       <ul className="movies-list">
         {movies.map(movie => (
-          <MoviesCard
-            id={movie.id}
-            key={movie.id}
-            img={movie.img}
-            title={movie.title}
-            type={type}
-            duration={movie.duration}
-          />
+          <MoviesCard id={movie.id} key={movie.id} movie={movie} />
         ))}
       </ul>
     </section>
