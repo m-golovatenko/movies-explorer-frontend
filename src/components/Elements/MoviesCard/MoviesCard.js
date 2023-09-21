@@ -1,24 +1,25 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { getTimeFromMins } from '../../../utils/utils';
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, deleteMovie, saveMovie }) {
   const [isLiked, setIsLiked] = useState(null);
   const location = useLocation();
 
-  function handleClick() {
+  function handleSave() {
     setIsLiked(true);
+    saveMovie(movie);
+  }
+
+  function handleDelete() {
+    deleteMovie(movie);
   }
 
   return (
     <li className="movie">
       <a href={movie.trailerLink} className="movie__trailer" target="_blank" rel="noreferrer">
-        <img
-          src={`https://api.nomoreparties.co${movie.image.url}`}
-          alt={movie.nameRU || movie.nameEn}
-          className="movie__img"
-        />
+        <img src={movie.image} alt={movie.nameRU || movie.nameEn} className="movie__img" />
       </a>
       <div className="movie__title">
         <h2 className="movie__title-text">{movie.nameRU}</h2>
@@ -26,7 +27,7 @@ function MoviesCard({ movie }) {
           <button
             className={!isLiked ? 'movie__like' : 'movie__like movie__like_active'}
             aria-label="Сохранить"
-            onClick={handleClick}
+            onClick={handleSave}
             type="button"
           />
         ) : (
@@ -38,6 +39,7 @@ function MoviesCard({ movie }) {
             }
             aria-label="Удалить"
             type="button"
+            onClick={handleDelete}
           ></button>
         )}
       </div>

@@ -34,50 +34,28 @@ class MainApi {
   }
 
   //Get Saved Movies - GET
-  getSavedMovies(token) {
+  getSavedMovies() {
     return fetch(`${this._url}/movies`, {
-      headers: { ...this._headers, Authorization: `Bearer ${token}` }
+      headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` }
     }).then(this._checkStatus);
   }
 
   //Add Movie - POST
-  createMovie(data, token) {
+  createMovie(data) {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
-      headers: { ...this._headers, Authorization: `Bearer ${token}` },
-      body: JSON.stringify({
-        country: data.country,
-        director: data.director,
-        duration: data.duration,
-        year: data.year,
-        description: data.description,
-        image: data.image,
-        trailerLink: data.trailerLink,
-        nameRU: data.nameRU,
-        nameEN: data.nameEN,
-        thumbnail: data.thumbnail
-      })
+      headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+      body: JSON.stringify(data)
     }).then(this._checkStatus);
   }
 
   //Delete Movie - DELETE
-  deleteSavedMovies(movieId, token) {
+  deleteSavedMovie(movieId) {
     return fetch(`${this._url}/movies/${movieId}`, {
       method: 'DELETE',
-      headers: { ...this._headers, Authorization: `Bearer ${token}` }
+      headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` }
     }).then(this._checkStatus);
   }
-
-  //Toggle LIke
-  /*changeLikeCardStatus(movieId, isLiked, token) {
-      return fetch(`${this._url}/movies/${movieId}/likes`, {
-        method: `${!isLiked ? 'PUT' : 'DELETE'}`, 
-        headers: 
-        {...this._headers,
-          Authorization: `Bearer ${token}`,
-        }
-      }).then(this._checkStatus);
-    }*/
 }
 
 export const mainApi = new MainApi({

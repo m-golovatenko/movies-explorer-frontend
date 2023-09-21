@@ -14,11 +14,13 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { authApi } from '../../utils/AuthApi';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
+import { filterMovies } from '../../utils/utils';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [initialMovies, setInitialMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -66,11 +68,12 @@ function App() {
         .getAllMovies()
         .then(movies => {
           localStorage.setItem('movies', JSON.stringify(movies));
-          setInitialMovies(movies);
+          const filteredMovies = filterMovies(movies);
+          setInitialMovies(filteredMovies);
         })
         .catch(e => console.error('Ошибка при получении фильмов'));
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, setInitialMovies]);
 
   function handleSubmitLogin({ password, email }) {
     authApi
@@ -109,8 +112,26 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/movies" element={<Movies initialMovies={initialMovies} />} />
-          <Route path="/saved-movies" element={<SavedMovies />} />
+          <Route
+            path="/movies"
+            element={
+              <Movies
+                initialMovies={initialMovies}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
+              />
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <SavedMovies
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          />
           <Route
             path="/profile"
             element={<Profile setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser} />}

@@ -6,7 +6,8 @@ import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import Pagination from '../Pagination/Pagination';
 import useScreen from '../../hooks/useScreen';
 
-function Movies({ initialMovies }) {
+function Movies({ initialMovies, setSavedMovies }) {
+  // eslint-disable-next-line
   const [nothingFound, setIsNothingFound] = useState(false);
   const [moviesNumber, setMoviesNumber] = useState(0);
   const { width } = useScreen();
@@ -37,7 +38,11 @@ function Movies({ initialMovies }) {
     <main className="movies" aria-label="movies">
       <SearchForm />
       {!nothingFound ? (
-        <MoviesCardList movies={initialMovies} moviesNumber={moviesNumber} />
+        <MoviesCardList
+          movies={initialMovies}
+          moviesNumber={moviesNumber}
+          setSavedMovies={setSavedMovies}
+        />
       ) : (
         <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
       )}
