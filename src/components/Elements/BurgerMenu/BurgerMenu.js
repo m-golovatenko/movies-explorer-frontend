@@ -1,10 +1,19 @@
 import React from 'react';
 import BurgerMenuLink from '../BurgerMenuLink/BurgerMenuLink';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './BurgerMenu.css';
 import account from '../../../images/header__acc.svg';
 
 function BurgerMenu({ isBurgerMenuOpen, handleClose }) {
+  const location = useLocation();
+
+  function isActive(path) {
+    if (location.pathname === path) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <div className={!isBurgerMenuOpen ? 'burger-menu' : ' burger-menu burger-menu_active'}>
       <div className="burger-menu__overlay">
@@ -12,16 +21,27 @@ function BurgerMenu({ isBurgerMenuOpen, handleClose }) {
           <button className="burger-menu__button-close" onClick={handleClose} type="button" />
           <ul className="burger-menu__links">
             <li>
-              <BurgerMenuLink path={'/'} linkText="Главная" handleClick={handleClose} />
+              <BurgerMenuLink
+                path={'/'}
+                linkText="Главная"
+                handleClick={handleClose}
+                isActive={isActive('/')}
+              />
             </li>
             <li>
-              <BurgerMenuLink path={'/movies'} linkText="Фильмы" handleClick={handleClose} />
+              <BurgerMenuLink
+                path={'/movies'}
+                linkText="Фильмы"
+                handleClick={handleClose}
+                isActive={isActive('/movies')}
+              />
             </li>
             <li>
               <BurgerMenuLink
                 path={'/saved-movies'}
                 linkText="Сохраненные фильмы"
                 handleClick={handleClose}
+                isActive={isActive('/saved-movies')}
               />
             </li>
           </ul>

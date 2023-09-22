@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-function SearchForm({ searchQuery, setSearchQuery, handleSearch, changeFilterIsShort, isShort }) {
+function SearchForm({ searchQuery, setSearchQuery, handleSearch, chanckIsShort, isShort }) {
   function submitForm(e) {
     e.preventDefault();
     handleSearch(searchQuery);
@@ -9,7 +9,7 @@ function SearchForm({ searchQuery, setSearchQuery, handleSearch, changeFilterIsS
 
   return (
     <section className="search" aria-label="search">
-      <form className="search__content" onSubmit={submitForm}>
+      <form className="search__content" onSubmit={submitForm} noValidate>
         <label className="search__content-img"></label>
         <input
           className="search__bar"
@@ -26,7 +26,12 @@ function SearchForm({ searchQuery, setSearchQuery, handleSearch, changeFilterIsS
             Найти
           </button>
           <div className="search__short-films">
-            <input type="checkbox" className="search__toggle-button" chacked={isShort} />
+            <input
+              type="checkbox"
+              className="search__toggle-button"
+              chacked={isShort}
+              onChange={chanckIsShort}
+            />
             <p className="search__text">Короткометражки</p>
           </div>
         </div>

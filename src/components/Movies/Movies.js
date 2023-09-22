@@ -5,7 +5,6 @@ import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import Pagination from '../Pagination/Pagination';
 import useScreen from '../../hooks/useScreen';
 import { moviesApi } from '../../utils/MoviesApi';
-import { SHORT_MOVIE_DURATION } from '../../utils/consts';
 
 function Movies({ setSavedMovies, savedMovies }) {
   const [initialMovies, setInitialMovies] = useState(
@@ -14,22 +13,30 @@ function Movies({ setSavedMovies, savedMovies }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('isShort')) || false);
+  const [isNothingFound, setIsNothingFound] = useState(false);
 
   function filter(movies, searchQuery) {
     const filtredMovies = movies.filter(movie =>
       movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
     );
     if (filtredMovies.length === 0) {
+      localStorage.setItem('filtredMovies', JSON.stringify([]));
       setIsNothingFound(true);
     }
-
+    setIsNothingFound(false);
     return filtredMovies;
   }
+
+  function chanckIsShort() {}
 
   function render(movies, searchQuery) {
     const filtredMovies = filter(movies, searchQuery);
     if (filtredMovies.length !== 0) {
       localStorage.setItem('filtredMovies', JSON.stringify(filtredMovies));
+    }
+    if (filtredMovies.length === 0) {
+      localStorage.setItem('filtredMovies', JSON.stringify([]));
+      setIsNothingFound(true);
     }
     setFiltredMovies(filtredMovies);
   }
@@ -63,8 +70,6 @@ function Movies({ setSavedMovies, savedMovies }) {
     }
   }, []);
 
-  // eslint-disable-next-line
-  const [nothingFound, setIsNothingFound] = useState(false);
   const [moviesNumber, setMoviesNumber] = useState(0);
 
   const { width } = useScreen();
@@ -98,8 +103,9 @@ function Movies({ setSavedMovies, savedMovies }) {
         setSearchQuery={setSearchQuery}
         handleSearch={handleSearch}
         isShort={isShort}
+        chanckIsShort={chanckIsShort}
       />
-      {!nothingFound ? (
+      {!isNothingFound ? (
         <MoviesCardList
           movies={filtredMovies}
           moviesNumber={moviesNumber}
@@ -109,7 +115,7 @@ function Movies({ setSavedMovies, savedMovies }) {
       ) : (
         <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
       )}
-      {!nothingFound && filtredMovies.length > 0 ? <Pagination loadMore={loadMore} /> : ''}
+      {!isNothingFound && filtredMovies.length > 0 ? <Pagination loadMore={loadMore} /> : ''}
     </main>
   );
 }

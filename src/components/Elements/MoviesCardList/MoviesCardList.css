@@ -3,19 +3,20 @@
   margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 270px);
+  grid-template-columns: repeat(4, minmax(0, 270px));
   gap: 38px 20px;
   padding-top: 70px;
   justify-content: center;
 }
 
-.movies-list:last-child::after {
-  content: ' ';
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
   .movies-list {
-    grid-template-columns: repeat(auto-fit, 339px);
+    grid-template-columns: repeat(3, minmax(0, 270px));
+  }
+}
+@media (max-width: 880px) {
+  .movies-list {
+    grid-template-columns: repeat(2, minmax(0, 339px));
     gap: 30px;
   }
 }
