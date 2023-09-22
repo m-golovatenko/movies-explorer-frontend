@@ -122,4 +122,8 @@
   .movie__duration {
     font-size: 10px;
   }
+
+  .movie__delete {
+    opacity: 1;
+  }
 }

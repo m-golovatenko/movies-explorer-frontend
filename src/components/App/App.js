@@ -13,14 +13,13 @@ import './App.css';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { authApi } from '../../utils/AuthApi';
 import { mainApi } from '../../utils/MainApi';
-import { moviesApi } from '../../utils/MoviesApi';
-import { filterMovies } from '../../utils/utils';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [initialMovies, setInitialMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(
+    JSON.parse(localStorage.getItem('savedMovies')) || []
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -62,19 +61,6 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      moviesApi
-        .getAllMovies()
-        .then(movies => {
-          localStorage.setItem('movies', JSON.stringify(movies));
-          const filteredMovies = filterMovies(movies);
-          setInitialMovies(filteredMovies);
-        })
-        .catch(e => console.error('Ошибка при получении фильмов'));
-    }
-  }, [isLoggedIn, setInitialMovies]);
-
   function handleSubmitLogin({ password, email }) {
     authApi
       .login(password, email)
@@ -114,13 +100,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={
-              <Movies
-                initialMovies={initialMovies}
-                savedMovies={savedMovies}
-                setSavedMovies={setSavedMovies}
-              />
-            }
+            element={<Movies savedMovies={savedMovies} setSavedMovies={setSavedMovies} />}
           />
           <Route
             path="/saved-movies"

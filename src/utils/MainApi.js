@@ -45,7 +45,19 @@ class MainApi {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        movieId: data.id,
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: 'https://api.nomoreparties.co/' + data.image.url,
+        trailerLink: data.trailerLink,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        thumbnail: 'https://api.nomoreparties.co/' + data.image.formats.thumbnail.url
+      })
     }).then(this._checkStatus);
   }
 
