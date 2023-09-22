@@ -33,7 +33,7 @@ function MoviesCard({ movie, deleteMovie, saveMovie, isSaved }) {
           <button
             className={!isSaved ? 'movie__like' : 'movie__like movie__like_active'}
             aria-label="Сохранить"
-            onClick={handleSave}
+            onClick={!isSaved ? handleSave : handleDelete}
             type="button"
           />
         ) : (

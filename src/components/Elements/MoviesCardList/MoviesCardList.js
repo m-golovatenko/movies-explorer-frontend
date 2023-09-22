@@ -4,14 +4,12 @@ import './MoviesCardList.css';
 import { mainApi } from '../../../utils/MainApi';
 
 function MoviesCardList({ movies, moviesNumber, savedMovies, setSavedMovies }) {
-  function isSaved(movie) {
-    const savedMovie = savedMovies.find(s => s.movieId === movie.id || s.movieId === movie.movieId);
-    if (savedMovie) {
-      return false;
-    } else {
-      return true;
-    }
+  function getSavedMovie(movie) {
+    return savedMovies.find(i => {
+      return i.movieId === movie.id || i.movieId === movie.movieId;
+    });
   }
+
   function saveMovie(movie) {
     mainApi
       .createMovie(movie)
@@ -50,7 +48,7 @@ function MoviesCardList({ movies, moviesNumber, savedMovies, setSavedMovies }) {
             movie={movie}
             saveMovie={saveMovie}
             deleteMovie={deleteMovie}
-            isSaved={isSaved}
+            isSaved={getSavedMovie(movie)}
           />
         ))}
       </ul>

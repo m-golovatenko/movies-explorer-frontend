@@ -26,11 +26,6 @@ function Movies({ setSavedMovies, savedMovies }) {
     return filtredMovies;
   }
 
-  function findShortMovies(movies) {
-    const shortMovies = movies.filter(movie => movie.duration < SHORT_MOVIE_DURATION);
-    return shortMovies;
-  }
-
   function render(movies, searchQuery) {
     const filtredMovies = filter(movies, searchQuery);
     if (filtredMovies.length !== 0) {
