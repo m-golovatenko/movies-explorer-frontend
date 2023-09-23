@@ -3,7 +3,7 @@ import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
 import { useFormWithValidation } from '../../../hooks/useValidation';
 
-function Register({ handleSubmitRegister }) {
+function Register({ handleSubmitRegister, errorText, isReqDone }) {
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -27,6 +27,8 @@ function Register({ handleSubmitRegister }) {
       buttonClasName={
         isValid ? 'auth__save-button' : 'auth__save-button auth__save-button_disabled'
       }
+      errorText={errorText}
+      isReqDone={isReqDone}
     >
       <InputElement
         inputId="auth__input-name"

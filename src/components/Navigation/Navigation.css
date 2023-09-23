@@ -24,6 +24,11 @@
   color: #fff;
 }
 
+.navigation__links-item_active {
+  padding-bottom: 4px;
+  border-bottom: 2px solid #fff;
+}
+
 .navigation__links-item:hover {
   opacity: 0.7;
   cursor: pointer;

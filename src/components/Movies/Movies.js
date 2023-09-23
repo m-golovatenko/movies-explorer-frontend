@@ -5,6 +5,7 @@ import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import Pagination from '../Pagination/Pagination';
 import useScreen from '../../hooks/useScreen';
 import { moviesApi } from '../../utils/MoviesApi';
+import { SHORT_MOVIE_DURATION } from '../../utils/consts';
 
 function Movies({ setSavedMovies, savedMovies }) {
   const [initialMovies, setInitialMovies] = useState(
@@ -15,36 +16,57 @@ function Movies({ setSavedMovies, savedMovies }) {
   const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('isShort')) || false);
   const [isNothingFound, setIsNothingFound] = useState(false);
 
-  function filter(movies, searchQuery) {
-    const filtredMovies = movies.filter(movie =>
-      movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
+  function filter(movies, searchQuery, shortMoviesFound) {
+    const filtredMovies = movies.filter(
+      movie =>
+        movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
     );
     if (filtredMovies.length === 0) {
       localStorage.setItem('filtredMovies', JSON.stringify([]));
       setIsNothingFound(true);
+    } else {
+      setIsNothingFound(false);
     }
-    setIsNothingFound(false);
-    return filtredMovies;
+
+    if (shortMoviesFound) {
+      return filterShortMovies(filtredMovies);
+    } else {
+      return filtredMovies;
+    }
   }
 
-  function chanckIsShort() {}
+  function filterShortMovies(movies) {
+    return movies.filter(movie => movie.duration < SHORT_MOVIE_DURATION);
+  }
 
-  function render(movies, searchQuery) {
-    const filtredMovies = filter(movies, searchQuery);
+  function render(movies, searchQuery, isShort) {
+    const filtredMovies = filter(movies, searchQuery, isShort);
     if (filtredMovies.length !== 0) {
       localStorage.setItem('filtredMovies', JSON.stringify(filtredMovies));
+      localStorage.setItem('isShort', isShort);
     }
     if (filtredMovies.length === 0) {
       localStorage.setItem('filtredMovies', JSON.stringify([]));
       setIsNothingFound(true);
     }
-    setFiltredMovies(filtredMovies);
+    setIsShort(isShort);
+    setFiltredMovies(isShort ? filterShortMovies(filtredMovies) : filtredMovies);
+  }
+
+  function handleShort() {
+    setIsShort(!isShort);
+    if (!isShort) {
+      setFiltredMovies(filterShortMovies(filtredMovies));
+    } else {
+      setFiltredMovies(JSON.parse(localStorage.getItem('filtredMovies')));
+    }
+    localStorage.setItem('isShort', !isShort);
   }
 
   function handleSearch() {
     localStorage.setItem('query', searchQuery);
     localStorage.setItem('isShort', isShort);
-    setIsShort(isShort);
 
     setSearchQuery(searchQuery);
     if (initialMovies.length === 0) {
@@ -53,7 +75,7 @@ function Movies({ setSavedMovies, savedMovies }) {
         .then(movies => {
           localStorage.setItem('allMovies', JSON.stringify(movies));
           setInitialMovies(movies);
-          render(movies, searchQuery);
+          render(movies, searchQuery, isShort);
         })
         .catch(e => console.error('Ошибка при получении фильмов'));
     } else {
@@ -62,9 +84,15 @@ function Movies({ setSavedMovies, savedMovies }) {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('filtredMovies') || localStorage.getItem('query')) {
+    if (
+      localStorage.getItem('filtredMovies') ||
+      localStorage.getItem('query') ||
+      localStorage.getItem('isShort')
+    ) {
+      const isShort = JSON.parse(localStorage.getItem('isShort'));
+      setIsShort(isShort);
       const movies = JSON.parse(localStorage.getItem('filtredMovies'));
-      setFiltredMovies(movies);
+      setFiltredMovies(isShort ? filterShortMovies(movies) : movies);
       const searchQuery = localStorage.getItem('query');
       setSearchQuery(searchQuery);
     }
@@ -103,7 +131,7 @@ function Movies({ setSavedMovies, savedMovies }) {
         setSearchQuery={setSearchQuery}
         handleSearch={handleSearch}
         isShort={isShort}
-        chanckIsShort={chanckIsShort}
+        handleShort={handleShort}
       />
       {!isNothingFound ? (
         <MoviesCardList

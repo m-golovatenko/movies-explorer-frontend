@@ -123,6 +123,7 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  width: 396px;
 }
 
 .profile__save {
@@ -192,5 +193,8 @@
   .profile__links-item {
     font-size: 12px;
     line-height: 15px;
+  }
+  .profile__edit {
+    width: 210px;
   }
 }

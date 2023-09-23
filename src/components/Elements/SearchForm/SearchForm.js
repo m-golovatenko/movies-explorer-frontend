@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-function SearchForm({ searchQuery, setSearchQuery, handleSearch, chanckIsShort, isShort }) {
+function SearchForm({ searchQuery, setSearchQuery, handleSearch, isShort, handleShort }) {
   function submitForm(e) {
     e.preventDefault();
     handleSearch(searchQuery);
@@ -29,8 +29,8 @@ function SearchForm({ searchQuery, setSearchQuery, handleSearch, chanckIsShort, 
             <input
               type="checkbox"
               className="search__toggle-button"
-              chacked={isShort}
-              onChange={chanckIsShort}
+              checked={isShort ? true : false}
+              onChange={handleShort}
             />
             <p className="search__text">Короткометражки</p>
           </div>

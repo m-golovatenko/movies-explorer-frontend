@@ -13,6 +13,7 @@ import './App.css';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { authApi } from '../../utils/AuthApi';
 import { mainApi } from '../../utils/MainApi';
+import { errorTexts } from '../../utils/errorTexts';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -20,6 +21,8 @@ function App() {
   const [savedMovies, setSavedMovies] = useState(
     JSON.parse(localStorage.getItem('savedMovies')) || []
   );
+  const [errorText, setErrorText] = useState('');
+  const [isReqDone, setIsReqDone] = useState(true);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,7 +43,7 @@ function App() {
       })
       .catch(e => {
         setLoggedIn(false);
-        console.error(`Что-то пошло не так: ${e}`);
+        console.error(`Что-то пошло не так при проверке токена: ${e}`);
       });
   }
 
@@ -57,7 +60,9 @@ function App() {
         .then(userData => {
           setCurrentUser(userData);
         })
-        .catch(err => console.error(`Что-то пошло не так: ${err}`));
+        .catch(err =>
+          console.error(`Что-то пошло не так при загрузке данных пользователя: ${err}`)
+        );
     }
   }, [isLoggedIn]);
 
@@ -67,10 +72,19 @@ function App() {
       .then(data => {
         localStorage.setItem('jwt', data.token);
         checkToken();
+        setIsReqDone(true);
       })
 
-      .catch(err => {
-        console.error(`Ошибка при входе. Код ошибки: ${err}`);
+      .catch(e => {
+        if (e === 401) {
+          setErrorText(errorTexts.login.wrongToken);
+        }
+        if (e === 500) {
+          setErrorText(errorTexts.other.error500);
+        }
+        setErrorText(errorTexts.login.auth);
+        setIsReqDone(false);
+        console.error(`Ошибка при входе. Код ошибки: ${e}`);
       });
   }
 
@@ -79,8 +93,14 @@ function App() {
       .register(password, email, name)
       .then(() => {
         handleSubmitLogin({ password, email });
+        setIsReqDone(true);
       })
       .catch(e => {
+        setIsReqDone(false);
+        setErrorText(e === 409 ? errorTexts.registration.exist : errorTexts.registration.error);
+        if (e === 500) {
+          setErrorText(errorTexts.other.error500);
+        }
         console.error(`Ошибка при регистрации пользователя: код ошибки (${e})`);
       });
   }
@@ -117,10 +137,25 @@ function App() {
             element={<Profile setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser} />}
           />
 
-          <Route path="/signin" element={<Login handleSubmitLogin={handleSubmitLogin} />} />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                handleSubmitLogin={handleSubmitLogin}
+                errorText={errorText}
+                isReqDone={isReqDone}
+              />
+            }
+          />
           <Route
             path="/signup"
-            element={<Register handleSubmitRegister={handleSubmitRegister} />}
+            element={
+              <Register
+                handleSubmitRegister={handleSubmitRegister}
+                errorText={errorText}
+                isReqDone={isReqDone}
+              />
+            }
           />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>

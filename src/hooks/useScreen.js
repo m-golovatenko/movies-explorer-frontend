@@ -5,7 +5,17 @@ function useScreen() {
 
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('resize', resizeTimer, false);
+    let timer;
+    function resizeTimer() {
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          handleWindowResize();
+        }, 0);
+      }
+    }
+
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 

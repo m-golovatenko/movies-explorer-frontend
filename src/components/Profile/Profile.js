@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useValidation';
 import { mainApi } from '../../utils/MainApi';
+import ServerError from '../Elements/ServerError/ServerError';
+import { errorTexts } from '../../utils/errorTexts';
 
 function Profile({ setLoggedIn, setCurrentUser }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -12,6 +14,8 @@ function Profile({ setLoggedIn, setCurrentUser }) {
   const navigate = useNavigate();
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
   const [isChanged, setIsChanged] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  const [isReqDone, setIsReqDone] = useState(true);
 
   function handleEdit() {
     setIsEditing(true);
@@ -23,8 +27,16 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       .changeUserInfo(userData, jwt)
       .then(newUserData => {
         setCurrentUser(newUserData);
+        setIsReqDone(true);
       })
-      .catch(err => console.error(`Ошибка при изменении данных пользователя: ${err}`));
+      .catch(e => {
+        setErrorText(e === 409 ? errorTexts.profile.exist : errorTexts.profile.error);
+        if (e === 500) {
+          setErrorText(errorTexts.other.error500);
+        }
+        setIsReqDone(false);
+        console.error(`Ошибка при изменении данных пользователя: ${e}`);
+      });
   }
 
   function handleLogout() {
@@ -48,8 +60,11 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setIsEditing(false);
-    handleUpdateUser(values);
+    if (isReqDone) {
+      setIsEditing(false);
+      handleUpdateUser(values);
+      setIsReqDone(false);
+    }
   }
 
   return (
@@ -88,7 +103,7 @@ function Profile({ setLoggedIn, setCurrentUser }) {
                 <label className="profile__info-item-title">E-mail</label>
                 <input
                   className={
-                    !isEditing
+                    !isEditing && isReqDone
                       ? 'profile__info-item-input'
                       : 'profile__info-item-input profile__info-item-input_active'
                   }
@@ -107,7 +122,7 @@ function Profile({ setLoggedIn, setCurrentUser }) {
           </ul>
         </form>
       </div>
-      {!isEditing ? (
+      {!isEditing && isReqDone ? (
         <ul className="profile__links">
           <li>
             <button className="profile__links-item" onClick={handleEdit} type="button">
@@ -126,7 +141,7 @@ function Profile({ setLoggedIn, setCurrentUser }) {
         </ul>
       ) : (
         <div className="profile__edit">
-          <p className="profile__error">При обновлении профиля произошла ошибка.</p>
+          <ServerError errorText={errorText} isReqDone={isReqDone} />
           <button
             className={
               isValid && isChanged ? 'profile__save' : 'profile__save profile__save_disabled'

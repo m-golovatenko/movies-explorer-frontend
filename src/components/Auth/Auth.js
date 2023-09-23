@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.css';
+import ServerError from '../Elements/ServerError/ServerError';
 
 function Auth(props) {
   return (
@@ -12,6 +13,7 @@ function Auth(props) {
           <ul className="auth__form-list">{props.children}</ul>
 
           <div className="auth__buttons">
+            <ServerError errorText={props.errorText} isReqDone={props.isReqDone} />
             <button className={props.buttonClasName} type="submit" aria-label="Зарегистрироваться">
               {props.buttonText}
             </button>

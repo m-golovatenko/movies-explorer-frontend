@@ -1,0 +1,15 @@
+.server-error {
+  margin: 0;
+  padding: 0;
+  color: #ff004c;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0;
+  margin-top: 10px;
+  pointer-events: none;
+}
+
+.server-error_active {
+  opacity: 1;
+}
