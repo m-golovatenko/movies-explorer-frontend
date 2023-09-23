@@ -76,13 +76,11 @@ function App() {
       })
 
       .catch(e => {
-        if (e === 401) {
-          setErrorText(errorTexts.login.wrongToken);
-        }
+        setErrorText(e === 401 ? errorTexts.login.wrongData : errorTexts.login.wrongToken);
+
         if (e === 500) {
           setErrorText(errorTexts.other.error500);
         }
-        setErrorText(errorTexts.login.auth);
         setIsReqDone(false);
         console.error(`Ошибка при входе. Код ошибки: ${e}`);
       });
