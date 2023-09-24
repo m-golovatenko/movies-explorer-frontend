@@ -1,8 +1,8 @@
 # Фронтенд часть проекта "Movies Explorer"
 
 Это веб-приложение, разработанное для поиска и просмотра информации о фильмах.
-[Ссылка на Pull Request](<[ссылка](https://github.com/m-golovatenko/movies-explorer-frontend/compare/main...level-3)>)
-[Ссылка на задеплоенный проект](<[ссылка](https://explore-movies.nomoredomainsicu.ru)>)
+[Ссылка на Pull Request](https://github.com/m-golovatenko/movies-explorer-frontend/pull/2)
+[Ссылка на задеплоенный проект](https://explore-movies.nomoredomainsicu.ru)
 
 ## Выбранный макет
 
