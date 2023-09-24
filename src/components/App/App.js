@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Main from '../Main/Main';
 import Movies from '..//Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -131,12 +132,20 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={<Movies savedMovies={savedMovies} setSavedMovies={setSavedMovies} />}
+            element={
+              <ProtectedRoute
+                element={Movies}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
+                isLoggedIn={isLoggedIn}
+              />
+            }
           />
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies
+              <ProtectedRoute
+                element={SavedMovies}
                 savedMovies={savedMovies}
                 setSavedMovies={setSavedMovies}
                 isLoggedIn={isLoggedIn}
@@ -145,7 +154,14 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<Profile setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser} />}
+            element={
+              <ProtectedRoute
+                element={Profile}
+                setLoggedIn={setLoggedIn}
+                setCurrentUser={setCurrentUser}
+                isLoggedIn={isLoggedIn}
+              />
+            }
           />
 
           <Route
