@@ -65,7 +65,7 @@ function Register({ handleSubmitRegister, errorText, isReqDone }) {
         type="password"
         name="password"
         placeholder="Пароль"
-        minLength="6"
+        minLength="8"
         maxLength="30"
         autoComplete="off"
         value={values.password || ''}
