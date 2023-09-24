@@ -164,6 +164,22 @@
   opacity: 1;
 }
 
+.profile__success {
+  margin: 0;
+  padding: 0;
+  color: #4bb543;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.profile__success_active {
+  opacity: 1;
+  pointer-events: all;
+}
+
 @media (max-width: 768px) {
   .profile {
     padding: 236px 0 269px;

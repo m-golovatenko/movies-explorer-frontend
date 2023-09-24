@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { mainApi } from '../../../utils/MainApi';
 
-function MoviesCardList({ movies, moviesNumber, savedMovies, setSavedMovies }) {
+function MoviesCardList({ movies, savedMovies, setSavedMovies }) {
   function getSavedMovie(movie) {
     return savedMovies.find(i => {
       return i.movieId === movie.id || i.movieId === movie.movieId;
@@ -42,7 +42,7 @@ function MoviesCardList({ movies, moviesNumber, savedMovies, setSavedMovies }) {
   return (
     <section aria-label="movie-list">
       <ul className="movies-list">
-        {movies.slice(0, moviesNumber).map(movie => (
+        {movies.map(movie => (
           <MoviesCard
             key={movie.id || movie.movieId}
             movie={movie}

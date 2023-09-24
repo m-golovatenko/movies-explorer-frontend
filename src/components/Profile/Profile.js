@@ -125,6 +125,15 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       {!isEditing && isReqDone ? (
         <ul className="profile__links">
           <li>
+            <p
+              className={
+                isReqDone ? 'profile__success' : 'profile__success profile__success_active'
+              }
+            >
+              Данные успешно обновлены
+            </p>
+          </li>
+          <li>
             <button className="profile__links-item" onClick={handleEdit} type="button">
               Редактировать
             </button>

@@ -38,7 +38,12 @@ function SearchForm({ searchQuery, setSearchQuery, handleSearch, isShort, handle
       </form>
 
       <div className="search__short-films search__short-films_mobile">
-        <input type="checkbox" className="search__toggle-button" />
+        <input
+          type="checkbox"
+          className="search__toggle-button"
+          checked={isShort ? true : false}
+          onChange={handleShort}
+        />
         <p className="search__text">Короткометражки</p>
       </div>
     </section>

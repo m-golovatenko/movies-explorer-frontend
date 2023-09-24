@@ -6,6 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import useScreen from '../../hooks/useScreen';
 import { moviesApi } from '../../utils/MoviesApi';
 import { SHORT_MOVIE_DURATION } from '../../utils/consts';
+import { MOVIES_NUMBER } from '../../utils/consts';
 
 function Movies({ setSavedMovies, savedMovies }) {
   const [initialMovies, setInitialMovies] = useState(
@@ -15,6 +16,11 @@ function Movies({ setSavedMovies, savedMovies }) {
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('isShort')) || false);
   const [isNothingFound, setIsNothingFound] = useState(false);
+  const { initial, desktop, tablet, mobile } = MOVIES_NUMBER;
+  const [moviesNumber, setMoviesNumber] = useState();
+  const { width } = useScreen();
+  const [moviesToShow, setMoviesToShow] = useState([]);
+  const [isButtonVisible, setIsButtonVisible] = useState(null);
 
   function filter(movies, searchQuery, shortMoviesFound) {
     const filtredMovies = movies.filter(
@@ -98,31 +104,38 @@ function Movies({ setSavedMovies, savedMovies }) {
     }
   }, []);
 
-  const [moviesNumber, setMoviesNumber] = useState(0);
-
-  const { width } = useScreen();
-  const column2 = 910;
-  const column1 = 768;
-
   const loadMore = useCallback(() => {
-    if (width > column2) {
-      setMoviesNumber(prevRange => prevRange + 4);
-    } else if (width > column1 && width < column2) {
-      setMoviesNumber(prevRange => prevRange + 2);
-    } else if (width < column1) {
-      setMoviesNumber(prevRange => prevRange + 2);
+    if (width > desktop.width) {
+      setMoviesNumber(prevRange => prevRange + initial.more);
+    } else if (width < desktop.width && width > tablet.width) {
+      setMoviesNumber(prevRange => prevRange + desktop.more);
+    } else if (width < tablet.width && width > mobile.width) {
+      setMoviesNumber(prevRange => prevRange + tablet.more);
+    } else if (width < mobile.width) {
+      setMoviesNumber(prevRange => prevRange + mobile.more);
     }
-  }, [width]);
+  }, [width, initial, desktop, tablet, mobile]);
 
   useEffect(() => {
-    if (width > column2) {
-      setMoviesNumber(12);
-    } else if (width > column1 && width < column2) {
-      setMoviesNumber(8);
-    } else if (width < column1) {
-      setMoviesNumber(5);
+    if (width > desktop.width) {
+      setMoviesNumber(initial.movies);
+    } else if (width < desktop.width && width > tablet.width) {
+      setMoviesNumber(desktop.movies);
+    } else if (width < tablet.width && width > mobile.width) {
+      setMoviesNumber(tablet.movies);
+    } else if (width < mobile.width) {
+      setMoviesNumber(mobile.movies);
     }
-  }, [width]);
+  }, [width, initial, desktop, tablet, mobile]);
+
+  useEffect(() => {
+    setMoviesToShow(filtredMovies.slice(0, moviesNumber));
+    if (moviesNumber >= filtredMovies.length) {
+      return setIsButtonVisible(false);
+    } else {
+      setIsButtonVisible(true);
+    }
+  }, [filtredMovies, moviesNumber]);
 
   return (
     <main className="movies" aria-label="movies">
@@ -135,15 +148,14 @@ function Movies({ setSavedMovies, savedMovies }) {
       />
       {!isNothingFound ? (
         <MoviesCardList
-          movies={filtredMovies}
-          moviesNumber={moviesNumber}
+          movies={moviesToShow}
           setSavedMovies={setSavedMovies}
           savedMovies={savedMovies}
         />
       ) : (
         <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
       )}
-      {!isNothingFound && filtredMovies.length > 0 ? <Pagination loadMore={loadMore} /> : ''}
+      {!isNothingFound ? <Pagination loadMore={loadMore} isButtonVisible={isButtonVisible} /> : ''}
     </main>
   );
 }
