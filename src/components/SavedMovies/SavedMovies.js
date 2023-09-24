@@ -11,49 +11,45 @@ function SavedMovies({ savedMovies, isLoggedIn, setSavedMovies }) {
   const [isShort, setIsShort] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isNothingFound, setIsNothingFound] = useState(false);
+  const [moviesToShow, setMoviesToShow] = useState(savedMovies);
 
   function filterShortMovies(movies) {
     return movies.filter(movie => movie.duration < SHORT_MOVIE_DURATION);
   }
 
   function handleShort() {
-    const filteredMovies = filter(savedMovies, searchQuery, isShort);
     setIsShort(!isShort);
     if (!isShort) {
-      setSavedMovies(filterShortMovies(filteredMovies));
+      setMoviesToShow(filterShortMovies(moviesToShow));
     } else {
-      setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')));
+      setMoviesToShow(filter(savedMovies, searchQuery));
     }
   }
 
-  function filter(savedMovies, searchQuery, shortMoviesFound) {
-    const filtredMovies = savedMovies.filter(
+  function filter(movies, searchQuery, shortMoviesFound) {
+    const moviesToShow = movies.filter(
       movie =>
         movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
         movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    if (filtredMovies.length === 0) {
+    if (moviesToShow.length === 0) {
       setIsNothingFound(true);
     } else {
       setIsNothingFound(false);
     }
 
     if (shortMoviesFound) {
-      return filterShortMovies(filtredMovies);
+      return filterShortMovies(moviesToShow);
     } else {
-      return filtredMovies;
+      return moviesToShow;
     }
   }
 
-  function handleSearch() {
-    const filtredMovies = filter(savedMovies, searchQuery, isShort);
-    if (filtredMovies.length !== 0) {
-      setSearchQuery(searchQuery);
-      setIsShort(isShort);
-      setSavedMovies(isShort ? filterShortMovies(filtredMovies) : filtredMovies);
-    } else {
-      setIsNothingFound(true);
-    }
+  function handleSearch(searchQuery, shortMoviesFound) {
+    const moviesToShow = filter(savedMovies, searchQuery, shortMoviesFound);
+    setSearchQuery(searchQuery);
+    setIsShort(isShort);
+    setMoviesToShow(moviesToShow);
   }
 
   useEffect(() => {
@@ -81,7 +77,7 @@ function SavedMovies({ savedMovies, isLoggedIn, setSavedMovies }) {
       {!isNothingFound ? (
         <>
           <MoviesCardList
-            movies={savedMovies}
+            movies={moviesToShow}
             setSavedMovies={setSavedMovies}
             savedMovies={savedMovies}
           />
