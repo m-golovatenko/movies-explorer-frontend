@@ -103,6 +103,19 @@ function App() {
       });
   }
 
+  useEffect(() => {
+    if (isLoggedIn && currentUser) {
+      mainApi
+        .getSavedMovies()
+        .then(savedMovies => {
+          const userMovies = savedMovies.filter(movie => movie.owner === currentUser._id);
+          localStorage.setItem('savedMovies', JSON.stringify(userMovies));
+          setSavedMovies(userMovies);
+        })
+        .catch(e => console.error('Ошибка при получении сохраненных фильмов'));
+    }
+  }, [isLoggedIn, currentUser, setSavedMovies]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">

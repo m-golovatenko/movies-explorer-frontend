@@ -16,6 +16,8 @@ function Profile({ setLoggedIn, setCurrentUser }) {
   const [isChanged, setIsChanged] = useState(false);
   const [errorText, setErrorText] = useState('');
   const [isReqDone, setIsReqDone] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(null);
+  const [fetching, setIsFetching] = useState(null);
 
   function handleEdit() {
     setIsEditing(true);
@@ -23,11 +25,13 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function handleUpdateUser(userData) {
     const jwt = localStorage.getItem('jwt');
+    setIsFetching(true);
     mainApi
       .changeUserInfo(userData, jwt)
       .then(newUserData => {
         setCurrentUser(newUserData);
         setIsReqDone(true);
+        setIsSuccess(true);
       })
       .catch(e => {
         setErrorText(e === 409 ? errorTexts.profile.exist : errorTexts.profile.error);
@@ -35,8 +39,10 @@ function Profile({ setLoggedIn, setCurrentUser }) {
           setErrorText(errorTexts.other.error500);
         }
         setIsReqDone(false);
+        setIsSuccess(false);
         console.error(`Ошибка при изменении данных пользователя: ${e}`);
-      });
+      })
+      .finally(() => setIsFetching(false));
   }
 
   function handleLogout() {
@@ -60,18 +66,15 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (isReqDone) {
-      setIsEditing(false);
-      handleUpdateUser(values);
-      setIsReqDone(false);
-    }
+    setIsEditing(false);
+    handleUpdateUser(values);
   }
 
   return (
     <main className="profile" aria-label="profile">
       <div className="profile__data">
         <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>
-        <form name="profile" noValidate>
+        <form name="profile" onSubmit={handleSubmit} noValidate>
           <ul className="profile__info">
             <li className="profile__info-item">
               <div className="profile__info-item-content">
@@ -122,17 +125,16 @@ function Profile({ setLoggedIn, setCurrentUser }) {
           </ul>
         </form>
       </div>
-      {!isEditing && isReqDone ? (
+      {!isEditing && isReqDone && !fetching ? (
         <ul className="profile__links">
-          <li>
-            <p
-              className={
-                isReqDone ? 'profile__success' : 'profile__success profile__success_active'
-              }
-            >
-              Данные успешно обновлены
-            </p>
-          </li>
+          {isSuccess ? (
+            <li>
+              <p className="profile__success">Данные успешно обновлены</p>
+            </li>
+          ) : (
+            ''
+          )}
+
           <li>
             <button className="profile__links-item" onClick={handleEdit} type="button">
               Редактировать
