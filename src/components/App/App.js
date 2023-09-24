@@ -27,7 +27,6 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const path = location.pathname;
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -83,13 +82,18 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
+    const path = location.pathname;
     if (jwt)
       authApi
         .checkToken(jwt)
         .then(data => {
           setLoggedIn(true);
           setCurrentUser(data);
-          navigate(path);
+          if (location.pathname === '/signin' || location.pathname === '/signup') {
+            navigate('/', { replace: true });
+          } else {
+            navigate(path, { replace: true });
+          }
         })
         .catch(e => {
           setLoggedIn(false);
