@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 
 function SearchForm({ searchQuery, setSearchQuery, handleSearch, isShort, handleShort }) {
+  const [error, setError] = useState('');
+  const [isValid, setIsValid] = useState(null);
+
   function submitForm(e) {
     e.preventDefault();
-    handleSearch(searchQuery);
+    if (isValid) {
+      handleSearch(searchQuery);
+      setError('');
+    } else {
+      setError('Нужно ввести ключевое слово');
+    }
   }
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  }, [setIsValid, searchQuery]);
 
   return (
     <section className="search" aria-label="search">
@@ -36,6 +52,7 @@ function SearchForm({ searchQuery, setSearchQuery, handleSearch, isShort, handle
           </div>
         </div>
       </form>
+      {!isValid ? <span className="search__error">{error}</span> : ''}
 
       <div className="search__short-films search__short-films_mobile">
         <input
