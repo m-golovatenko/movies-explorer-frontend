@@ -41,10 +41,10 @@ class MainApi {
   }
 
   //Add Movie - POST
-  createMovie(data) {
+  createMovie(data, token) {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
-      headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         movieId: data.id,
         country: data.country,
@@ -62,10 +62,10 @@ class MainApi {
   }
 
   //Delete Movie - DELETE
-  deleteSavedMovie(movieId) {
+  deleteSavedMovie(movieId, token) {
     return fetch(`${this._url}/movies/${movieId}`, {
       method: 'DELETE',
-      headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+      headers: { ...this._headers, Authorization: `Bearer ${token}` }
     }).then(this._checkStatus);
   }
 }

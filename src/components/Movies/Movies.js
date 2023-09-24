@@ -7,6 +7,7 @@ import useScreen from '../../hooks/useScreen';
 import { moviesApi } from '../../utils/MoviesApi';
 import { SHORT_MOVIE_DURATION } from '../../utils/consts';
 import { MOVIES_NUMBER } from '../../utils/consts';
+import Preloader from './Preloader/Preloader';
 
 function Movies({ setSavedMovies, savedMovies }) {
   const [initialMovies, setInitialMovies] = useState(
@@ -21,6 +22,7 @@ function Movies({ setSavedMovies, savedMovies }) {
   const { width } = useScreen();
   const [moviesToShow, setMoviesToShow] = useState([]);
   const [isButtonVisible, setIsButtonVisible] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
   function filter(movies, searchQuery, shortMoviesFound) {
     const filtredMovies = movies.filter(
@@ -75,7 +77,9 @@ function Movies({ setSavedMovies, savedMovies }) {
     localStorage.setItem('isShort', isShort);
 
     setSearchQuery(searchQuery);
+
     if (initialMovies.length === 0) {
+      setIsLoading(true);
       moviesApi
         .getAllMovies()
         .then(movies => {
@@ -83,7 +87,8 @@ function Movies({ setSavedMovies, savedMovies }) {
           setInitialMovies(movies);
           render(movies, searchQuery, isShort);
         })
-        .catch(e => console.error('Ошибка при получении фильмов'));
+        .catch(e => console.error('Ошибка при получении фильмов'))
+        .finally(() => setIsLoading(false));
     } else {
       render(initialMovies, searchQuery, isShort);
     }
@@ -146,16 +151,23 @@ function Movies({ setSavedMovies, savedMovies }) {
         isShort={isShort}
         handleShort={handleShort}
       />
-      {!isNothingFound ? (
+      {isLoading ? (
+        <Preloader />
+      ) : !isNothingFound ? (
         <MoviesCardList
           movies={moviesToShow}
           setSavedMovies={setSavedMovies}
           savedMovies={savedMovies}
+          isLoading={isLoading}
         />
       ) : (
         <p className="movies__nothing">По вашему запросу ничего не&nbsp;найдено😢</p>
       )}
-      {!isNothingFound ? <Pagination loadMore={loadMore} isButtonVisible={isButtonVisible} /> : ''}
+      {!isNothingFound && !isLoading ? (
+        <Pagination loadMore={loadMore} isButtonVisible={isButtonVisible} />
+      ) : (
+        ''
+      )}
     </main>
   );
 }

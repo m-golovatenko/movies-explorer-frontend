@@ -27,31 +27,7 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-
-  function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    authApi
-      .checkToken(jwt)
-      .then(data => {
-        if (!data) {
-          return;
-        }
-        setLoggedIn(true);
-        setCurrentUser(data);
-        if (location.pathname === '/signin' || location.pathname === '/signup') {
-          navigate('/movies', { replace: true });
-        }
-      })
-      .catch(e => {
-        setLoggedIn(false);
-        console.error(`Что-то пошло не так при проверке токена: ${e}`);
-      });
-  }
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line
-  }, []);
+  const path = location.pathname;
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -72,7 +48,8 @@ function App() {
       .login(password, email)
       .then(data => {
         localStorage.setItem('jwt', data.token);
-        checkToken();
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
         setIsReqDone(true);
       })
 
@@ -105,9 +82,27 @@ function App() {
   }
 
   useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt)
+      authApi
+        .checkToken(jwt)
+        .then(data => {
+          setLoggedIn(true);
+          setCurrentUser(data);
+          navigate(path);
+        })
+        .catch(e => {
+          setLoggedIn(false);
+          console.error(`Что-то пошло не так при проверке токена: ${e}`);
+        });
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
     if (isLoggedIn && currentUser) {
       mainApi
-        .getSavedMovies()
+        .getSavedMovies(jwt)
         .then(savedMovies => {
           const userMovies = savedMovies.filter(movie => movie.owner === currentUser._id);
           localStorage.setItem('savedMovies', JSON.stringify(userMovies));
@@ -124,12 +119,12 @@ function App() {
         location.pathname === '/movies' ||
         location.pathname === '/saved-movies' ||
         location.pathname === '/profile' ? (
-          <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+          <Header isLoggedIn={isLoggedIn} />
         ) : (
           ''
         )}
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route exact path="/" element={<Main />} />
           <Route
             path="/movies"
             element={

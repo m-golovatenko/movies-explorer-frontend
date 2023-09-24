@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { getTimeFromMins } from '../../../utils/utils';
 
-function MoviesCard({ movie, deleteMovie, saveMovie, isSaved }) {
+function MoviesCard({ movie, deleteMovie, saveMovie, isSaved, deleteClick }) {
   const location = useLocation();
 
   function handleSave() {
@@ -12,6 +12,10 @@ function MoviesCard({ movie, deleteMovie, saveMovie, isSaved }) {
 
   function handleDelete() {
     deleteMovie(movie);
+  }
+
+  function handleDeleteClick() {
+    deleteClick(movie);
   }
 
   return (
@@ -45,7 +49,7 @@ function MoviesCard({ movie, deleteMovie, saveMovie, isSaved }) {
             }
             aria-label="Удалить"
             type="button"
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
           ></button>
         )}
       </div>

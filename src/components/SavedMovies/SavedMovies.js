@@ -3,6 +3,7 @@ import SearchForm from '../Elements/SearchForm/SearchForm';
 import MoviesCardList from '../Elements/MoviesCardList/MoviesCardList';
 import Pagination from '../Pagination/Pagination';
 import { SHORT_MOVIE_DURATION } from '../../utils/consts';
+import { mainApi } from '../../utils/MainApi';
 
 function SavedMovies({ savedMovies, setSavedMovies }) {
   const [isShort, setIsShort] = useState(false);
@@ -49,6 +50,30 @@ function SavedMovies({ savedMovies, setSavedMovies }) {
     setMoviesToShow(moviesToShow);
   }
 
+  function deleteClick(movie) {
+    const savedMovie = savedMovies.find(
+      item => item.movieId === movie.id || item.movieId === movie.movieId
+    );
+
+    const jwt = localStorage.getItem('jwt');
+
+    mainApi
+      .deleteSavedMovie(savedMovie._id, jwt)
+      .then(() => {
+        const newArray = moviesToShow.filter(deletedMovie => {
+          if (movie.id === deletedMovie.movieId || movie.movieId === deletedMovie.movieId) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        localStorage.setItem('savedMovies', JSON.stringify(newArray));
+        setMoviesToShow(newArray);
+        setSavedMovies(newArray);
+      })
+      .catch(e => console.error('Ошибка при удалении фильма'));
+  }
+
   return (
     <main className="movies" aria-label="saved-movies">
       <SearchForm
@@ -64,6 +89,7 @@ function SavedMovies({ savedMovies, setSavedMovies }) {
             movies={moviesToShow}
             setSavedMovies={setSavedMovies}
             savedMovies={savedMovies}
+            deleteClick={deleteClick}
           />
           <Pagination />
         </>
