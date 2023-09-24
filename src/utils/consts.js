@@ -1,5 +1,5 @@
 const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-const MAIN_URL = 'http://localhost:3001';
+const MAIN_URL = 'https://api.explore-movies.nomoredomainsicu.ru';
 
 const SHORT_MOVIE_DURATION = 40;
 
