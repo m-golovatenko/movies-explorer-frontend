@@ -2,6 +2,9 @@
 
 Это веб-приложение, разработанное для поиска и просмотра информации о фильмах.
 
+- [Ссылка на Pull Request](https://github.com/m-golovatenko/movies-explorer-frontend/pull/2)
+- [Ссылка на задеплоенный проект](https://explore-movies.nomoredomainsicu.ru)
+
 ## Выбранный макет
 
 dark-1

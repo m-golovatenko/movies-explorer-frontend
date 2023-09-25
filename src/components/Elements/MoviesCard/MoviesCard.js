@@ -1,26 +1,43 @@
 import React from 'react';
 import './MoviesCard.css';
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getTimeFromMins } from '../../../utils/utils';
 
-function MoviesCard({ img, title, duration }) {
-  const [isLiked, setIsLiked] = useState(null);
+function MoviesCard({ movie, deleteMovie, saveMovie, isSaved, deleteClick }) {
   const location = useLocation();
 
-  function handleClick() {
-    setIsLiked(true);
+  function handleSave() {
+    saveMovie(movie);
+  }
+
+  function handleDelete() {
+    deleteMovie(movie);
+  }
+
+  function handleDeleteClick() {
+    deleteClick(movie);
   }
 
   return (
     <li className="movie">
-      <img src={img} alt={title} className="movie__img" />
+      <a href={movie.trailerLink} className="movie__trailer" target="_blank" rel="noreferrer">
+        <img
+          src={
+            location.pathname === '/movies'
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : movie.image
+          }
+          alt={movie.nameRU || movie.nameEn}
+          className="movie__img"
+        />
+      </a>
       <div className="movie__title">
-        <h2 className="movie__title-text">{title}</h2>
+        <h2 className="movie__title-text">{movie.nameRU}</h2>
         {location.pathname === '/movies' ? (
           <button
-            className={!isLiked ? 'movie__like' : 'movie__like movie__like_active'}
+            className={!isSaved ? 'movie__like' : 'movie__like movie__like_active'}
             aria-label="Сохранить"
-            onClick={handleClick}
+            onClick={!isSaved ? handleSave : handleDelete}
             type="button"
           />
         ) : (
@@ -32,10 +49,11 @@ function MoviesCard({ img, title, duration }) {
             }
             aria-label="Удалить"
             type="button"
+            onClick={handleDeleteClick}
           ></button>
         )}
       </div>
-      <p className="movie__duration">{duration}</p>
+      <p className="movie__duration">{getTimeFromMins(movie.duration)}</p>
     </li>
   );
 }

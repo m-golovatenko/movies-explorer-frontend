@@ -1,8 +1,20 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import Auth from '../Auth';
 import InputElement from '../../Elements/InputElement/InputElement';
+import { useFormWithValidation } from '../../../hooks/useValidation';
 
-function Register() {
+function Register({ handleSubmitRegister, errorText, isReqDone, fetching }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleSubmitRegister(values);
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
   return (
     <Auth
       formName="registration"
@@ -11,6 +23,12 @@ function Register() {
       titleText="Добро пожаловать!"
       buttonText="Зарегистрироваться"
       path="/signin"
+      handleSubmit={handleSubmit}
+      buttonClasName={
+        isValid && !fetching ? 'auth__save-button' : 'auth__save-button auth__save-button_disabled'
+      }
+      errorText={errorText}
+      isReqDone={isReqDone}
     >
       <InputElement
         inputId="auth__input-name"
@@ -21,6 +39,10 @@ function Register() {
         minLength="2"
         maxLength="30"
         autoComplete="off"
+        value={values.name || ''}
+        handleChange={handleChange}
+        errorText={errors.name}
+        pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
       />
 
       <InputElement
@@ -32,6 +54,9 @@ function Register() {
         minLength="2"
         maxLength="30"
         autoComplete="email"
+        value={values.email || ''}
+        handleChange={handleChange}
+        errorText={errors.email}
       />
 
       <InputElement
@@ -40,9 +65,12 @@ function Register() {
         type="password"
         name="password"
         placeholder="Пароль"
-        minLength="6"
+        minLength="8"
         maxLength="30"
         autoComplete="off"
+        value={values.password || ''}
+        handleChange={handleChange}
+        errorText={errors.password}
       />
     </Auth>
   );

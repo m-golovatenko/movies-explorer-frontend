@@ -1,10 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import './InputElement.css';
+import { useFormWithValidation } from '../../../hooks/useValidation';
 
 function InputElement(props) {
-  // eslint-disable-next-line
-  const [isValid, setIsValid] = useState(true);
+  const { isValid } = useFormWithValidation();
 
   return (
     <li className="auth__form-list-item">
@@ -19,12 +18,15 @@ function InputElement(props) {
         maxLength={props.maxLength}
         required
         autoComplete={props.autoComplete}
+        value={props.value}
+        onChange={props.handleChange}
+        pattern={props.pattern}
       />
 
       <span
         className={isValid ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}
       >
-        Что-то пошло не так...
+        {props.errorText}
       </span>
     </li>
   );

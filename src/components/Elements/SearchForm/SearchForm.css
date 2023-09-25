@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.search__content:focus-within {
+  outline: 1px solid #4285f4;
+}
+
 .search__bar {
   border: none;
   outline: none;
@@ -131,6 +135,17 @@
 
 .search__short-films_mobile {
   display: none;
+}
+
+.search__error {
+  margin: 0;
+  padding: 0;
+  color: #ff004c;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 1;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
