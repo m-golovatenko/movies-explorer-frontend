@@ -155,7 +155,9 @@ function Profile({ setLoggedIn, setCurrentUser }) {
           <ServerError errorText={errorText} isReqDone={isReqDone} />
           <button
             className={
-              isValid && isChanged ? 'profile__save' : 'profile__save profile__save_disabled'
+              isValid && isChanged && !fetching
+                ? 'profile__save'
+                : 'profile__save profile__save_disabled'
             }
             onClick={handleSubmit}
             type="submit"

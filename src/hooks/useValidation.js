@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import isEmail from 'validator/lib/isEmail';
 
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -16,6 +17,14 @@ export function useFormWithValidation() {
       );
     } else {
       target.setCustomValidity('');
+    }
+
+    if (name === 'email') {
+      if (!isEmail(value)) {
+        target.setCustomValidity('Адрес почты должен соответсвовать формату: example@example.com');
+      } else {
+        target.setCustomValidity('');
+      }
     }
 
     setValues({ ...values, [name]: value });

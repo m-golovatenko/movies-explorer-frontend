@@ -80,7 +80,7 @@
   display: none;
 }
 
-.movie__delete:hover {
+.movie:hover .movie__delete {
   display: block;
   cursor: pointer;
   opacity: 0.8;

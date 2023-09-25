@@ -24,6 +24,7 @@ function App() {
   );
   const [errorText, setErrorText] = useState('');
   const [isReqDone, setIsReqDone] = useState(true);
+  const [fetching, setIsFetching] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function App() {
   }, [isLoggedIn]);
 
   function handleSubmitLogin({ password, email }) {
+    setIsFetching(true);
     authApi
       .login(password, email)
       .then(data => {
@@ -60,10 +62,12 @@ function App() {
         }
         setIsReqDone(false);
         console.error(`Ошибка при входе. Код ошибки: ${e}`);
-      });
+      })
+      .finally(() => setIsFetching(false));
   }
 
   function handleSubmitRegister({ password, email, name }) {
+    setIsFetching(true);
     authApi
       .register(password, email, name)
       .then(() => {
@@ -77,7 +81,8 @@ function App() {
           setErrorText(errorTexts.other.error500);
         }
         console.error(`Ошибка при регистрации пользователя: код ошибки (${e})`);
-      });
+      })
+      .finally(() => setIsFetching(false));
   }
 
   useEffect(() => {
@@ -114,7 +119,8 @@ function App() {
         })
         .catch(e => console.error('Ошибка при получении сохраненных фильмов'));
     }
-  }, [isLoggedIn, currentUser, setSavedMovies]);
+    // eslint-disable-next-line
+  }, [isLoggedIn, currentUser]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -170,6 +176,7 @@ function App() {
                 handleSubmitLogin={handleSubmitLogin}
                 errorText={errorText}
                 isReqDone={isReqDone}
+                fetching={fetching}
               />
             }
           />
@@ -180,6 +187,7 @@ function App() {
                 handleSubmitRegister={handleSubmitRegister}
                 errorText={errorText}
                 isReqDone={isReqDone}
+                fetching={fetching}
               />
             }
           />
